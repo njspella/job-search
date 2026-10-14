@@ -1,8 +1,8 @@
 {
- "refreshed_at": "2026-10-14T23:17:02",
+ "refreshed_at": "2026-10-14T23:17:52",
  "report": {
-  "added": 6,
-  "seen": 9,
+  "added": 0,
+  "seen": 15,
   "sources": {
    "remotive": "ok: 10 of 150 matched",
    "remoteok": "ok: 2 of 99 matched",
@@ -25,7 +25,7 @@
    "source": "remotive",
    "posted": "2026-09-16",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-14T23:17:02"
+   "last_seen": "2026-10-14T23:17:52"
   },
   {
    "id": "7f4070a16ca68ffe",
@@ -39,7 +39,7 @@
    "source": "remoteok",
    "posted": "2026-08-30",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-14T23:17:02"
+   "last_seen": "2026-10-14T23:17:52"
   },
   {
    "id": "76549bd9aeaa308f",
@@ -53,7 +53,7 @@
    "source": "remoteok",
    "posted": "2026-08-27",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-14T23:17:02"
+   "last_seen": "2026-10-14T23:17:52"
   },
   {
    "id": "3635360b8c18c64d",
@@ -67,7 +67,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-12",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-14T23:17:02"
+   "last_seen": "2026-10-14T23:17:52"
   },
   {
    "id": "29caa671ffb97166",
@@ -81,7 +81,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-10",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-14T23:17:02"
+   "last_seen": "2026-10-14T23:17:52"
   },
   {
    "id": "44e2ff010771957b",
@@ -95,7 +95,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-04",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-14T23:17:02"
+   "last_seen": "2026-10-14T23:17:52"
   }
  ]
 }

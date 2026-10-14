@@ -1,0 +1,448 @@
+<title>Pella Job Tracker</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: a working list. Header with refresh state, status tabs as the summary, then one row per job. */
+  :root {
+    --bg: #f4f6f8; --surface: #ffffff; --fg: #18212b; --muted: #5d6b79; --line: #dde3ea;
+    --accent: #1d5f8a; --accent-ink: #ffffff; --accent-soft: #e3eef6;
+    --good: #20734a; --good-soft: #e1f2e8; --warn: #8a5b00; --warn-soft: #fbefd6;
+    --bad: #a23a2c; --fresh: #fff7dc; --shadow: 0 1px 2px rgb(24 33 43 / .06);
+    --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11161c; --surface: #19212a; --fg: #e6ebf0; --muted: #96a3b1; --line: #2b3642;
+      --accent: #7cb4dc; --accent-ink: #0d1b26; --accent-soft: #1d2e3c;
+      --good: #6fcf9a; --good-soft: #17301f; --warn: #e6b65a; --warn-soft: #33290f;
+      --bad: #f08a7a; --fresh: #2a2612; --shadow: none; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11161c; --surface: #19212a; --fg: #e6ebf0; --muted: #96a3b1; --line: #2b3642;
+    --accent: #7cb4dc; --accent-ink: #0d1b26; --accent-soft: #1d2e3c;
+    --good: #6fcf9a; --good-soft: #17301f; --warn: #e6b65a; --warn-soft: #33290f;
+    --bad: #f08a7a; --fresh: #2a2612; --shadow: none; color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--fg); font: 15px/1.5 var(--body);
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 20px 48px;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; display: grid; gap: 16px; }
+  button, select, input { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  header { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: end; justify-content: space-between; }
+  h1 { font: 700 26px/1.1 var(--display); letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+  .criteria { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .btn { border: 1px solid var(--line); background: var(--surface); padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: 500; }
+  .btn:hover { border-color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .btn:disabled { opacity: .6; cursor: progress; }
+
+  .notice { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; font-size: 14px; }
+  .notice.good { border-color: var(--good); }
+  .notice.warn { border-color: var(--warn); }
+  .notice ul { margin: 6px 0 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
+
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tab { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 5px 12px; cursor: pointer; font-size: 14px; }
+  .tab b { font-family: var(--mono); font-weight: 500; font-size: 13px; margin-left: 4px; color: var(--muted); }
+  .tab[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
+  .tab[aria-pressed="true"] b { color: var(--accent); }
+
+  .filters { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+  .filters input[type=search] { flex: 1 1 240px; min-width: 0; }
+  input[type=search], input[type=text], input[type=number], input[type=url], select {
+    border: 1px solid var(--line); background: var(--surface); border-radius: 6px; padding: 7px 9px;
+  }
+  label.check { display: inline-flex; gap: 6px; align-items: center; font-size: 14px; color: var(--muted); }
+
+  details.add { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+  details.add summary { cursor: pointer; font-weight: 600; }
+  .form { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; margin-top: 12px; align-items: end; }
+  .form label { display: grid; gap: 4px; font-size: 12px; color: var(--muted); letter-spacing: .02em; }
+  .form label.check { display: inline-flex; font-size: 14px; }
+
+  .list { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 760px; }
+  th { text-align: left; font: 600 11px/1 var(--body); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 12px 12px 10px; border-bottom: 1px solid var(--line); }
+  td { padding: 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  tr.fresh td { background: var(--fresh); }
+  tr.active td:first-child { box-shadow: inset 3px 0 var(--good); }
+  tr.closed td { color: var(--muted); }
+  .title a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  .title a:hover { text-decoration: underline; }
+  .company { color: var(--muted); font-size: 14px; }
+  .tag { display: inline-block; white-space: nowrap; font-size: 12px; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+  .tag.good { background: var(--good-soft); color: var(--good); }
+  .tag.warn { background: var(--warn-soft); color: var(--warn); }
+  .money { font-family: var(--mono); font-size: 13px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .meta { font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .people summary { cursor: pointer; list-style: none; }
+  .people summary::-webkit-details-marker { display: none; }
+  .people ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 4px; font-size: 13px; }
+  .people a { color: var(--accent); }
+  .people span { color: var(--muted); }
+  td.note input { width: 100%; min-width: 150px; }
+  select.status { min-width: 128px; }
+  .empty { padding: 36px 20px; text-align: center; color: var(--muted); }
+  .empty strong { display: block; color: var(--fg); font: 600 17px/1.3 var(--display); margin-bottom: 6px; }
+  footer { color: var(--muted); font-size: 13px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Pella Job Tracker</h1>
+      <div class="criteria">Engineering, AI, quality and operations leadership · $120k+ · remote or within 45 miles of Pella, IA</div>
+    </div>
+    <div class="actions">
+      <button class="btn" id="importBtn" type="button">Import LinkedIn connections</button>
+      <input type="file" id="csvFile" accept=".csv,text/csv" hidden>
+      <button class="btn primary" id="refreshBtn" type="button">Refresh search</button>
+    </div>
+  </header>
+
+  <div class="notice" id="notice" hidden></div>
+  <div class="criteria" id="status">Loading your saved jobs…</div>
+
+  <div class="tabs" id="tabs" role="group" aria-label="Filter by status"></div>
+
+  <div class="filters">
+    <input type="search" id="q" placeholder="Search title, company, location or notes" aria-label="Search jobs">
+    <select id="where" aria-label="Location">
+      <option value="">Remote and near Pella</option>
+      <option value="remote">Remote only</option>
+      <option value="local">Near Pella only</option>
+    </select>
+    <label class="check"><input type="checkbox" id="hasConn"> I know someone there</label>
+    <label class="check"><input type="checkbox" id="hasPay"> Salary listed</label>
+  </div>
+
+  <details class="add" id="addBox">
+    <summary>Add a job you found on LinkedIn, Indeed or a company site</summary>
+    <form class="form" id="addForm">
+      <label>Job title<input type="text" id="fTitle" name="title" required></label>
+      <label>Company<input type="text" id="fCompany" name="company" required></label>
+      <label>Location<input type="text" id="fLocation" name="location" placeholder="Pella, IA"></label>
+      <label>Link<input type="url" id="fUrl" name="url" placeholder="https://"></label>
+      <label>Salary from ($)<input type="number" id="fMin" name="salary_min" step="1000" min="0"></label>
+      <label>Salary to ($)<input type="number" id="fMax" name="salary_max" step="1000" min="0"></label>
+      <label class="check"><input type="checkbox" id="fRemote" name="remote"> Remote</label>
+      <button class="btn primary" type="submit">Save job</button>
+    </form>
+  </details>
+
+  <div class="list">
+    <table>
+      <thead><tr>
+        <th>Status</th><th>Job</th><th>Who you know</th><th>Location</th><th>Salary</th><th>Found</th><th>Notes</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="empty" id="empty" hidden></div>
+  </div>
+
+  <footer>Statuses and notes are saved as you change them. Your LinkedIn connections are stored privately to your account.</footer>
+</div>
+
+<script>
+const STATUSES = ["New", "Saved", "Applied", "Interviewing", "Offer", "Rejected", "Not interested"];
+const CLOSED = ["Rejected", "Not interested"];
+const IN_PROGRESS = ["Applied", "Interviewing", "Offer"];
+const CHUNK = 800;
+
+const S = { db: null, uid: null, mcp: null, jobs: [], refresh: null, config: null,
+            byCompany: new Map(), connCount: 0, tab: "Active", loaded: false };
+const $ = (id) => document.getElementById(id);
+const use = (name) => (window.claude && window.claude.use ? window.claude.use(name) : Promise.resolve(null));
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const money = (n) => (n ? "$" + Math.round(n / 1000) + "k" : "");
+const safeUrl = (u) => (/^https?:\/\//i.test(u || "") ? u : "");
+
+// Same rules as the Python tool, so "Vermeer Corporation" and "Vermeer Corp." match.
+function companyKey(name) {
+  let s = String(name || "").toLowerCase().replace(/&/g, " and ");
+  s = s.replace(/\b(inc|incorporated|llc|l\.l\.c|ltd|limited|corp|corporation|co|company|plc|lp|llp|group|holdings|the)\b\.?/g, " ");
+  return s.replace(/[^a-z0-9]+/g, " ").trim().split(/\s+/).filter(Boolean).join(" ");
+}
+
+function notice(html, kind = "") {
+  const n = $("notice");
+  n.className = "notice " + kind;
+  n.innerHTML = html;
+  n.hidden = !html;
+}
+
+function when(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  return isNaN(d) ? iso.slice(0, 10) : d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+}
+
+/* ---------- rendering ---------- */
+
+function matches(j) {
+  if (S.tab === "Active" && CLOSED.includes(j.status)) return false;
+  if (!["Active", "All"].includes(S.tab) && j.status !== S.tab) return false;
+  const where = $("where").value;
+  if (where === "remote" && !j.remote) return false;
+  if (where === "local" && j.remote) return false;
+  if ($("hasConn").checked && !(S.byCompany.get(companyKey(j.company)) || []).length) return false;
+  if ($("hasPay").checked && !(j.salary_min || j.salary_max)) return false;
+  const q = $("q").value.trim().toLowerCase();
+  if (q && ![j.title, j.company, j.location, j.notes].join(" ").toLowerCase().includes(q)) return false;
+  return true;
+}
+
+function renderTabs() {
+  const count = { Active: 0, All: S.jobs.length };
+  for (const j of S.jobs) {
+    count[j.status] = (count[j.status] || 0) + 1;
+    if (!CLOSED.includes(j.status)) count.Active++;
+  }
+  $("tabs").innerHTML = ["Active", ...STATUSES, "All"].map((t) =>
+    `<button type="button" class="tab" data-tab="${esc(t)}" aria-pressed="${t === S.tab}">${esc(t)}<b>${count[t] || 0}</b></button>`
+  ).join("");
+}
+
+function renderStatus() {
+  const r = S.refresh;
+  const parts = [`${S.jobs.length} jobs saved`];
+  parts.push(r && r.refreshed_at ? `last refreshed ${new Date(r.refreshed_at).toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}` : "not refreshed yet");
+  parts.push(S.uid ? `${S.connCount} LinkedIn connections loaded` : "sign in to load LinkedIn connections");
+  $("status").textContent = parts.join(" · ");
+}
+
+function render() {
+  renderTabs();
+  renderStatus();
+  const latest = S.refresh && S.refresh.refreshed_at;
+  const list = S.jobs.filter(matches);
+  $("rows").innerHTML = list.map((j) => {
+    const people = S.byCompany.get(companyKey(j.company)) || [];
+    const fresh = latest && j.first_seen && j.first_seen >= latest && j.status === "New";
+    const cls = [fresh ? "fresh" : "", IN_PROGRESS.includes(j.status) ? "active" : "", CLOSED.includes(j.status) ? "closed" : ""].join(" ");
+    const url = safeUrl(j.url);
+    const title = url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(j.title)}</a>` : esc(j.title);
+    const pay = j.salary_min || j.salary_max
+      ? `<span class="money">${money(j.salary_min)}${j.salary_max && j.salary_max !== j.salary_min ? "–" + money(j.salary_max) : ""}</span>`
+      : `<span class="tag warn">Not listed</span>`;
+    const who = people.length
+      ? `<details class="people"><summary><span class="tag good">${people.length} ${people.length === 1 ? "connection" : "connections"}</span></summary><ul>${
+          people.slice(0, 25).map((p) => {
+            const link = safeUrl(p.url);
+            return `<li>${link ? `<a href="${esc(link)}" target="_blank" rel="noopener">${esc(p.name)}</a>` : esc(p.name)} <span>${esc(p.position)}</span></li>`;
+          }).join("")}${people.length > 25 ? `<li><span>and ${people.length - 25} more</span></li>` : ""}</ul></details>`
+      : `<span class="meta">None</span>`;
+    const opts = STATUSES.map((s) => `<option ${s === j.status ? "selected" : ""}>${esc(s)}</option>`).join("");
+    return `<tr class="${cls}">
+      <td><select class="status" data-id="${esc(j.id)}" aria-label="Status for ${esc(j.title)}">${opts}</select></td>
+      <td class="title">${title}<div class="company">${esc(j.company)}</div></td>
+      <td>${who}</td>
+      <td>${j.remote ? `<span class="tag">Remote</span> ` : ""}<span class="company">${esc(j.location)}</span></td>
+      <td>${pay}</td>
+      <td class="meta" title="Source: ${esc(j.source)}">${esc(when(j.first_seen))}<div>${esc(j.source)}</div></td>
+      <td class="note"><input type="text" class="noteInput" data-id="${esc(j.id)}" value="${esc(j.notes)}" placeholder="Add a note" aria-label="Notes for ${esc(j.title)}"></td>
+    </tr>`;
+  }).join("");
+  const empty = $("empty");
+  empty.hidden = list.length > 0;
+  if (!S.loaded) {
+    empty.innerHTML = "<strong>Loading your saved jobs</strong>";
+  } else if (!S.db) {
+    empty.innerHTML = "<strong>This page needs to be opened on claude.ai</strong>Saved jobs and statuses live with the page there.";
+  } else if (!S.jobs.length) {
+    empty.innerHTML = "<strong>No jobs saved yet</strong>Click Refresh search to pull new postings, or add one you found elsewhere.";
+  } else {
+    empty.innerHTML = "<strong>No jobs match these filters</strong>Try the All tab or clear the search.";
+  }
+}
+
+/* ---------- data ---------- */
+
+async function loadConnections() {
+  if (!S.db || !S.uid) return;
+  try {
+    const meta = await S.db.doc(`data/users/${S.uid}/connmeta`).get();
+    const m = meta.exists ? meta.data() : null;
+    const map = new Map();
+    let total = 0;
+    for (let i = 0; m && i < m.chunks; i++) {
+      const snap = await S.db.doc(`data/users/${S.uid}/conn-${i}`).get();
+      for (const [first, last, url, company, position] of (snap.exists ? snap.data().rows : [])) {
+        const key = companyKey(company);
+        total++;
+        if (!key) continue;
+        if (!map.has(key)) map.set(key, []);
+        map.get(key).push({ name: `${first} ${last}`.trim(), url, position });
+      }
+    }
+    S.byCompany = map;
+    S.connCount = total;
+    render();
+  } catch (e) {
+    notice(`Your LinkedIn connections could not be loaded (${esc(e.code || e.message)}). Reload the page to try again.`, "warn");
+  }
+}
+
+function parseCsv(text) {
+  const rows = [];
+  let row = [], field = "", quoted = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (quoted) {
+      if (c === '"' && text[i + 1] === '"') { field += '"'; i++; }
+      else if (c === '"') quoted = false;
+      else field += c;
+    } else if (c === '"') quoted = true;
+    else if (c === ",") { row.push(field); field = ""; }
+    else if (c === "\n" || c === "\r") {
+      if (c === "\r" && text[i + 1] === "\n") i++;
+      row.push(field); rows.push(row); row = []; field = "";
+    } else field += c;
+  }
+  if (field || row.length) { row.push(field); rows.push(row); }
+  return rows;
+}
+
+async function importConnections(file) {
+  if (!S.db || !S.uid) { notice("Sign in to claude.ai to import connections.", "warn"); return; }
+  const rows = parseCsv((await file.text()).replace(/^﻿/, ""));
+  const h = rows.findIndex((r) => r[0] === "First Name");
+  if (h < 0) {
+    notice("That file isn't LinkedIn's Connections.csv. It should have a header row starting with First Name.", "warn");
+    return;
+  }
+  const col = (name) => rows[h].indexOf(name);
+  const idx = ["First Name", "Last Name", "URL", "Company", "Position"].map(col);
+  const people = rows.slice(h + 1).filter((r) => r.length > 1)
+    .map((r) => idx.map((i) => (i >= 0 ? (r[i] || "").trim() : "")));
+  notice(`Importing ${people.length} connections…`);
+  try {
+    const old = await S.db.doc(`data/users/${S.uid}/connmeta`).get();
+    const oldChunks = old.exists ? old.data().chunks : 0;
+    const chunks = Math.ceil(people.length / CHUNK);
+    for (let i = 0; i < chunks; i++) {
+      await S.db.doc(`data/users/${S.uid}/conn-${i}`).set({ rows: people.slice(i * CHUNK, (i + 1) * CHUNK) });
+    }
+    for (let i = chunks; i < oldChunks; i++) await S.db.doc(`data/users/${S.uid}/conn-${i}`).delete();
+    await S.db.doc(`data/users/${S.uid}/connmeta`).set({ chunks, count: people.length, imported_at: new Date().toISOString() });
+    await loadConnections();
+    const matched = S.jobs.filter((j) => (S.byCompany.get(companyKey(j.company)) || []).length).length;
+    notice(`Imported ${people.length} connections. You know someone at ${matched} of your saved jobs.`, "good");
+  } catch (e) {
+    notice(`The import stopped partway (${esc(e.code || e.message)}). Try importing the file again.`, "warn");
+  }
+}
+
+async function refreshSearch() {
+  const btn = $("refreshBtn");
+  const trig = S.config && S.config.trigger_id;
+  if (!S.mcp || !trig) {
+    notice("Refresh runs automatically every morning. Starting it from this page needs the page open on claude.ai.", "warn");
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = "Starting…";
+  try {
+    await S.mcp.callTool("Claude Code Remote", "fire_trigger", { trigger_id: trig });
+    notice("Refresh started. New jobs appear in this list automatically, usually within ten minutes.", "good");
+  } catch (e) {
+    const fix = {
+      server_not_connected: "Claude Code Remote isn't connected for your account. Add it in claude.ai Settings, Connectors.",
+      needs_reauth: "Reconnect Claude Code Remote in claude.ai Settings, Connectors, then try again.",
+      not_in_manifest: "You turned off this page's access to start a refresh. Allow it from the page's Permissions menu.",
+      approval_required: "Starting a refresh needs your approval. Click Refresh search again and choose Allow.",
+      server_unavailable: "The refresh service didn't answer. Wait a minute, then try again.",
+      tool_error: "The refresh task couldn't start: " + esc(e.message),
+    }[e.code] || `The refresh couldn't start (${esc(e.code || e.message)}). The daily refresh still runs each morning.`;
+    notice(fix, "warn");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Refresh search";
+  }
+}
+
+/* ---------- events ---------- */
+
+$("tabs").addEventListener("click", (e) => {
+  const t = e.target.closest(".tab");
+  if (t) { S.tab = t.dataset.tab; render(); }
+});
+for (const id of ["q", "where", "hasConn", "hasPay"]) $(id).addEventListener("input", render);
+
+$("rows").addEventListener("change", async (e) => {
+  const id = e.target.dataset.id;
+  if (!id || !S.db) return;
+  const patch = e.target.classList.contains("status")
+    ? { status: e.target.value, status_changed: new Date().toISOString() }
+    : { notes: e.target.value };
+  try {
+    await S.db.doc(`jobs/${id}`).update(patch);
+  } catch (err) {
+    notice(`That change wasn't saved (${esc(err.code || err.message)}). Try again.`, "warn");
+  }
+});
+
+$("importBtn").addEventListener("click", () => $("csvFile").click());
+$("csvFile").addEventListener("change", async (e) => {
+  const f = e.target.files[0];
+  e.target.value = "";
+  if (f) await importConnections(f);
+});
+$("refreshBtn").addEventListener("click", refreshSearch);
+
+$("addForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if (!S.db) { notice("Open this page on claude.ai to save jobs.", "warn"); return; }
+  const num = (v) => (v ? Number(v) : null);
+  const now = new Date().toISOString();
+  const job = {
+    title: $("fTitle").value.trim(), company: $("fCompany").value.trim(),
+    location: $("fLocation").value.trim(), url: $("fUrl").value.trim(),
+    salary_min: num($("fMin").value), salary_max: num($("fMax").value),
+    remote: $("fRemote").checked, source: "added by you", posted: "",
+    first_seen: now, last_seen: now, status: "Saved", notes: "",
+  };
+  try {
+    await S.db.collection("jobs").add(job);
+    e.target.reset();
+    notice(`Saved ${esc(job.title)} at ${esc(job.company)}.`, "good");
+  } catch (err) {
+    notice(`The job wasn't saved (${esc(err.code || err.message)}).`, "warn");
+  }
+});
+
+/* ---------- start ---------- */
+
+render();
+(async () => {
+  S.db = await use("db");
+  S.loaded = true;
+  if (!S.db) { render(); return; }
+  S.db.collection("jobs").onSnapshot((snap) => {
+    S.jobs = snap.docs.map((d) => ({ id: d.id, status: "New", ...d.data() }))
+      .sort((a, b) => String(b.first_seen || "").localeCompare(String(a.first_seen || "")));
+    render();
+  }, (e) => notice(`Saved jobs stopped updating (${esc(e.code)}). Reload the page.`, "warn"));
+  S.db.doc("meta/refresh").onSnapshot((d) => { S.refresh = d.exists ? d.data() : null; render(); }, () => {});
+  S.db.doc("meta/config").onSnapshot((d) => { S.config = d.exists ? d.data() : null; }, () => {});
+  const user = await use("user");
+  S.uid = user ? await user.id() : null;
+  render();
+  loadConnections();
+  S.mcp = await use("mcp");
+})();
+</script>

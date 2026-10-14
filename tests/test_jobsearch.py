@@ -205,3 +205,24 @@ class ServerTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ExportTests(unittest.TestCase):
+    def test_export_merges_and_new_docs(self):
+        import tempfile
+        from pathlib import Path
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "jobs.json"
+            r1 = refresh.export(path, CFG, {"fake": lambda cfg: [j(title="Engineering Manager", location="Pella, IA")]})
+            r2 = refresh.export(path, CFG, {"fake": lambda cfg: [
+                j(title="Engineering Manager", location="Pella, IA"),
+                j(source_id="2", title="Plant Manager", location="Knoxville, IA"),
+                j(source_id="3", title="Cashier", location="Pella, IA")]})
+            self.assertEqual((r1["added"], r2["added"], r2["seen"]), (1, 1, 1))
+            data = json.loads(path.read_text())
+            self.assertEqual(len(data["jobs"]), 2)
+            first_id = [x["id"] for x in data["jobs"] if x["title"] == "Engineering Manager"][0]
+            written = refresh.new_docs(path, {first_id}, Path(d) / "docs")
+            self.assertEqual(len(written), 1)
+            doc = json.loads((Path(d) / "docs" / f"{written[0]}.json").read_text())
+            self.assertEqual((doc["title"], doc["status"]), ("Plant Manager", "New"))

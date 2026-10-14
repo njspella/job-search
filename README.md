@@ -10,7 +10,17 @@ about 50 minutes of Pella, Iowa.
   is saved as soon as you change it.
 - **Connections** shows which of your LinkedIn connections work at each company.
 
-Everything runs on your computer and stays there (in `data/jobs.db`). It needs only
+## The website
+
+The hosted version is the Pella Job Tracker page on claude.ai
+(https://claude.ai/artifact/LDJ4KUg9mmqvfeiqrB9G8H). Its source is `site/job-tracker.html`.
+Each refresh runs the **Refresh jobs** GitHub Action, which writes `site-data/jobs.json`;
+a daily Claude scheduled task (also started by the page's Refresh button) then adds new
+jobs to the page without touching your statuses or notes.
+
+## Running it on your own computer instead
+
+Everything in this mode runs on your computer and stays there (in `data/jobs.db`). It needs only
 Python 3.9 or newer, with no extra packages.
 
 ## Start it

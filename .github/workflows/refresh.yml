@@ -1,0 +1,34 @@
+name: Refresh jobs
+
+# Pulls new postings into data/jobs.json, which the hosted job search website reads.
+# Started by the website's Refresh button (through the daily scheduled task) or by hand.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency: refresh-jobs
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch postings
+        env:
+          ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
+          USAJOBS_API_KEY: ${{ secrets.USAJOBS_API_KEY }}
+          USAJOBS_EMAIL: ${{ secrets.USAJOBS_EMAIL }}
+        run: python -m jobsearch export site-data/jobs.json
+      - name: Save results
+        run: |
+          git config user.name "job-search-bot"
+          git config user.email "job-search-bot@users.noreply.github.com"
+          git add site-data/jobs.json
+          git commit -m "Refresh jobs" || echo "No changes"
+          git push

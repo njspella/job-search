@@ -32,7 +32,7 @@ def parse(data, remote=False):
 
 def fetch(cfg):
     if not (cfg["adzuna_app_id"] and cfg["adzuna_app_key"]):
-        raise RuntimeError("skipped: add adzuna_app_id and adzuna_app_key to config.local.json")
+        raise RuntimeError("skipped: needs a free Adzuna API key (see README)")
     base = {
         "app_id": cfg["adzuna_app_id"], "app_key": cfg["adzuna_app_key"],
         "results_per_page": 50, "max_days_old": 30, "content-type": "application/json",

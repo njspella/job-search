@@ -27,7 +27,7 @@ def parse(data, remote=False):
 
 def fetch(cfg):
     if not (cfg["usajobs_api_key"] and cfg["usajobs_email"]):
-        raise RuntimeError("skipped: add usajobs_api_key and usajobs_email to config.local.json")
+        raise RuntimeError("skipped: needs a free USAJOBS API key (see README)")
     headers = {"Host": "data.usajobs.gov", "User-Agent": cfg["usajobs_email"],
                "Authorization-Key": cfg["usajobs_api_key"]}
     jobs = []

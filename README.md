@@ -18,6 +18,11 @@ Each refresh runs the **Refresh jobs** GitHub Action, which writes `site-data/jo
 a daily Claude scheduled task (also started by the page's Refresh button) then adds new
 jobs to the page without touching your statuses or notes.
 
+Local Iowa jobs come from Adzuna, which needs a free key. To turn it on for the website, get
+a key at https://developer.adzuna.com/ and add two repository secrets in GitHub
+(Settings > Secrets and variables > Actions): `ADZUNA_APP_ID` and `ADZUNA_APP_KEY`.
+USAJOBS works the same way with `USAJOBS_API_KEY` and `USAJOBS_EMAIL`.
+
 ## Running it on your own computer instead
 
 Everything in this mode runs on your computer and stays there (in `data/jobs.db`). It needs only

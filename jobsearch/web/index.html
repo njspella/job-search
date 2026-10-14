@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Job Search</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --panel: #ffffff; --text: #1d1d1b; --muted: #6b6b66; --line: #e3e2dd;
+    --accent: #2f5bd3; --accent-soft: #e8eefc; --good: #1f7a4d; --good-soft: #e3f3ea;
+    --warn: #8a5a00; --warn-soft: #fbf0d9; --new: #fff8e1;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #161615; --panel: #1f1f1d; --text: #ecebe6; --muted: #9c9b95; --line: #33332f;
+      --accent: #7d9cf0; --accent-soft: #23293a; --good: #6cc597; --good-soft: #1d2e25;
+      --warn: #e2b558; --warn-soft: #33291a; --new: #2a2718;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { padding: 20px 24px 8px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+  h1 { font-size: 20px; margin: 0; }
+  .sub { color: var(--muted); font-size: 13px; }
+  main { padding: 0 24px 40px; }
+  button, select, input, textarea { font: inherit; color: inherit; }
+  button { border: 1px solid var(--line); background: var(--panel); padding: 7px 12px; border-radius: 8px; cursor: pointer; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button:disabled { opacity: .6; cursor: wait; }
+  select, input[type=text], input[type=search], input[type=number], input[type=url] {
+    border: 1px solid var(--line); background: var(--panel); padding: 6px 8px; border-radius: 6px;
+  }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0 12px; }
+  .toolbar input[type=search] { flex: 1 1 220px; }
+  .stats { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; cursor: pointer; }
+  .stat b { font-variant-numeric: tabular-nums; }
+  .stat.on { border-color: var(--accent); background: var(--accent-soft); }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12px; color: var(--muted); font-weight: 600; position: sticky; top: 0; background: var(--panel); }
+  tr.fresh td { background: var(--new); }
+  tr.applied td:first-child { box-shadow: inset 3px 0 var(--good); }
+  td.job a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  td.job a:hover { text-decoration: underline; }
+  .company { color: var(--muted); }
+  .pill { display: inline-block; font-size: 12px; padding: 1px 7px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+  .pill.good { background: var(--good-soft); color: var(--good); }
+  .pill.warn { background: var(--warn-soft); color: var(--warn); }
+  .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .people { margin: 6px 0 0; padding: 0; list-style: none; font-size: 13px; }
+  .people a { color: var(--accent); }
+  .people span { color: var(--muted); }
+  td.notes input { width: 100%; min-width: 140px; }
+  .empty { padding: 40px; text-align: center; color: var(--muted); }
+  details.panel { padding: 10px 14px; margin-bottom: 12px; }
+  details summary { cursor: pointer; font-weight: 600; }
+  .form { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; margin-top: 10px; align-items: end; }
+  .form label { display: grid; gap: 3px; font-size: 12px; color: var(--muted); }
+  #report { display: none; margin-bottom: 12px; padding: 10px 14px; font-size: 13px; }
+  #report ul { margin: 4px 0 0; padding-left: 18px; }
+  .tablewrap { overflow-x: auto; }
+  @media (max-width: 760px) {
+    header, main { padding-left: 16px; padding-right: 16px; }
+    th.hide-sm, td.hide-sm { display: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Job Search</h1>
+    <div class="sub" id="subtitle">Loading…</div>
+  </div>
+  <div style="display:flex; gap:8px; flex-wrap:wrap">
+    <label><button type="button" onclick="document.getElementById('csv').click()">Import LinkedIn connections</button>
+      <input type="file" id="csv" accept=".csv" hidden></label>
+    <button class="primary" id="refresh">Refresh search</button>
+  </div>
+</header>
+<main>
+  <div id="report" class="panel"></div>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="toolbar">
+    <input type="search" id="q" placeholder="Search title, company, location, notes">
+    <select id="where">
+      <option value="">Remote and local</option>
+      <option value="remote">Remote only</option>
+      <option value="local">Near Pella only</option>
+    </select>
+    <label><input type="checkbox" id="conn"> Has a connection</label>
+    <label><input type="checkbox" id="pay"> Salary listed</label>
+  </div>
+
+  <details class="panel" id="addbox">
+    <summary>Add a job you found elsewhere (LinkedIn, Indeed, a career page)</summary>
+    <form class="form" id="addform">
+      <label>Job title<input type="text" name="title" required></label>
+      <label>Company<input type="text" name="company" required></label>
+      <label>Location<input type="text" name="location" placeholder="Pella, IA"></label>
+      <label>Link<input type="url" name="url" placeholder="https://"></label>
+      <label>Salary min<input type="number" name="salary_min" step="1000"></label>
+      <label>Salary max<input type="number" name="salary_max" step="1000"></label>
+      <label style="flex-direction:row"><span><input type="checkbox" name="remote"> Remote</span></label>
+      <button class="primary" type="submit">Add job</button>
+    </form>
+  </details>
+
+  <div class="panel tablewrap">
+    <table>
+      <thead><tr>
+        <th>Status</th><th>Job</th><th>Connections</th><th>Location</th>
+        <th>Salary</th><th class="hide-sm">Found</th><th class="hide-sm">Notes</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="empty" id="empty" hidden></div>
+  </div>
+</main>
+
+<script>
+let state = { jobs: [], statuses: [], last_refresh: null, connection_count: 0 };
+let statusFilter = "Active";
+const CLOSED = ["Rejected", "Not interested"];
+const $ = (id) => document.getElementById(id);
+
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+function money(n) { return n ? "$" + Math.round(n / 1000) + "k" : ""; }
+function day(s) { return s ? s.slice(0, 10) : ""; }
+
+async function api(path, opts = {}) {
+  const res = await fetch(path, opts);
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || res.statusText);
+  return data;
+}
+
+function load(data) {
+  Object.assign(state, data);
+  const lr = state.last_refresh;
+  $("subtitle").textContent =
+    `${state.jobs.length} jobs saved · ` +
+    (lr ? `last refreshed ${lr.ran_at.replace("T", " ").slice(0, 16)}` : "never refreshed") +
+    ` · ${state.connection_count} LinkedIn connections loaded`;
+  render();
+}
+
+function matches(j) {
+  if (statusFilter === "Active" && CLOSED.includes(j.status)) return false;
+  if (statusFilter !== "Active" && statusFilter !== "All" && j.status !== statusFilter) return false;
+  const where = $("where").value;
+  if (where === "remote" && !j.remote) return false;
+  if (where === "local" && j.remote) return false;
+  if ($("conn").checked && !j.connections.length) return false;
+  if ($("pay").checked && !(j.salary_min || j.salary_max)) return false;
+  const q = $("q").value.trim().toLowerCase();
+  if (q && ![j.title, j.company, j.location, j.notes].join(" ").toLowerCase().includes(q)) return false;
+  return true;
+}
+
+function renderStats() {
+  const counts = { Active: 0, All: state.jobs.length };
+  for (const s of state.statuses) counts[s] = 0;
+  for (const j of state.jobs) {
+    counts[j.status] = (counts[j.status] || 0) + 1;
+    if (!CLOSED.includes(j.status)) counts.Active++;
+  }
+  $("stats").innerHTML = ["Active", ...state.statuses, "All"].map((s) =>
+    `<span class="stat ${s === statusFilter ? "on" : ""}" data-s="${esc(s)}">${esc(s)} <b>${counts[s] || 0}</b></span>`
+  ).join("");
+}
+
+function render() {
+  renderStats();
+  const lastRun = state.last_refresh && state.last_refresh.ran_at;
+  const list = state.jobs.filter(matches);
+  $("rows").innerHTML = list.map((j) => {
+    const fresh = lastRun && j.first_seen >= lastRun && j.status === "New";
+    const opts = state.statuses.map((s) => `<option ${s === j.status ? "selected" : ""}>${esc(s)}</option>`).join("");
+    const pay = j.salary_min || j.salary_max
+      ? `<span class="num">${money(j.salary_min)}${j.salary_max && j.salary_max !== j.salary_min ? "–" + money(j.salary_max) : ""}</span>`
+      : `<span class="pill warn">not listed</span>`;
+    const people = j.connections.length
+      ? `<details><summary><span class="pill good">${j.connections.length} ${j.connections.length === 1 ? "person" : "people"}</span></summary>
+           <ul class="people">${j.connections.map((p) =>
+             `<li>${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.name)}</a>` : esc(p.name)}
+              <span>${esc(p.position)}</span></li>`).join("")}</ul></details>`
+      : `<span class="sub">none</span>`;
+    const title = j.url ? `<a href="${esc(j.url)}" target="_blank" rel="noopener">${esc(j.title)}</a>` : esc(j.title);
+    return `<tr class="${fresh ? "fresh" : ""} ${["Applied", "Interviewing", "Offer"].includes(j.status) ? "applied" : ""}">
+      <td><select data-id="${j.id}" class="status">${opts}</select></td>
+      <td class="job">${title}<div class="company">${esc(j.company)}</div></td>
+      <td>${people}</td>
+      <td>${j.remote ? `<span class="pill">Remote</span> ` : ""}<span class="sub">${esc(j.location)}</span></td>
+      <td>${pay}</td>
+      <td class="hide-sm num sub" title="Source: ${esc(j.source)}">${day(j.first_seen)}<div>${esc(j.source)}</div></td>
+      <td class="hide-sm notes"><input type="text" data-id="${j.id}" class="note" value="${esc(j.notes)}" placeholder="Add a note"></td>
+    </tr>`;
+  }).join("");
+  const empty = $("empty");
+  empty.hidden = list.length > 0;
+  empty.textContent = state.jobs.length
+    ? "No jobs match these filters."
+    : "No jobs yet. Click Refresh search to pull postings, or add one you found elsewhere.";
+}
+
+$("stats").addEventListener("click", (e) => {
+  const s = e.target.closest(".stat");
+  if (s) { statusFilter = s.dataset.s; render(); }
+});
+for (const id of ["q", "where", "conn", "pay"]) $(id).addEventListener("input", render);
+
+$("rows").addEventListener("change", async (e) => {
+  const id = e.target.dataset.id;
+  if (!id) return;
+  const job = state.jobs.find((j) => String(j.id) === id);
+  const body = e.target.classList.contains("status") ? { status: e.target.value } : { notes: e.target.value };
+  await api(`/api/jobs/${id}`, { method: "POST", body: JSON.stringify(body) });
+  Object.assign(job, body);
+  if (body.status) render();
+});
+
+$("refresh").addEventListener("click", async () => {
+  const btn = $("refresh");
+  btn.disabled = true; btn.textContent = "Refreshing…";
+  try {
+    const data = await api("/api/refresh", { method: "POST" });
+    load(data);
+    const r = data.report;
+    $("report").style.display = "block";
+    $("report").innerHTML = `<b>${r.added} new jobs</b>, ${r.seen} already saved.
+      <ul>${Object.entries(r.sources).map(([k, v]) => `<li>${esc(k)}: ${esc(v)}</li>`).join("")}</ul>`;
+  } catch (err) {
+    alert("Refresh failed: " + err.message);
+  } finally {
+    btn.disabled = false; btn.textContent = "Refresh search";
+  }
+});
+
+$("csv").addEventListener("change", async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  try {
+    const data = await api("/api/connections", { method: "POST", body: await file.text() });
+    load(data);
+    const matched = state.jobs.filter((j) => j.connections.length).length;
+    $("report").style.display = "block";
+    $("report").innerHTML = `Imported <b>${data.imported}</b> connections. ${matched} saved jobs are at a company where you know someone.`;
+  } catch (err) {
+    alert(err.message);
+  }
+  e.target.value = "";
+});
+
+$("addform").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const job = Object.fromEntries(f.entries());
+  job.remote = f.get("remote") === "on";
+  for (const k of ["salary_min", "salary_max"]) job[k] = job[k] ? Number(job[k]) : null;
+  try {
+    load(await api("/api/jobs", { method: "POST", body: JSON.stringify(job) }));
+    e.target.reset();
+  } catch (err) {
+    alert(err.message);
+  }
+});
+
+api("/api/jobs").then(load).catch((err) => { $("subtitle").textContent = "Could not load jobs: " + err.message; });
+</script>
+</body>
+</html>

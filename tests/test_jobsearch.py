@@ -226,3 +226,25 @@ class ExportTests(unittest.TestCase):
             self.assertEqual(len(written), 1)
             doc = json.loads((Path(d) / "docs" / f"{written[0]}.json").read_text())
             self.assertEqual((doc["title"], doc["status"]), ("Plant Manager", "New"))
+
+
+class GoogleJobsTests(unittest.TestCase):
+    def test_parse_prefers_linkedin_indeed_glassdoor(self):
+        from jobsearch.sources import googlejobs
+        data = {"jobs_results": [
+            {"title": "Quality Director", "company_name": "Vermeer", "location": "Pella, IA", "job_id": "x1",
+             "via": "via LinkedIn", "detected_extensions": {"salary": "$130K–$160K a year"},
+             "apply_options": [{"title": "Vermeer Careers", "link": "https://careers/1"},
+                               {"title": "Indeed", "link": "https://indeed/1"}]},
+            {"title": "AI Engineer", "company_name": "X", "location": "Anywhere", "job_id": "x2",
+             "detected_extensions": {"work_from_home": True, "salary": "$60–$80 an hour"},
+             "apply_options": [{"title": "LinkedIn", "link": "https://linkedin/2"}]},
+        ]}
+        a, b = googlejobs.parse(data)
+        self.assertEqual((a["url"], a["source"], a["salary_min"], a["salary_max"]), ("https://indeed/1", "Indeed", 130000, 160000))
+        self.assertEqual((b["source"], b["remote"], b["salary_min"]), ("LinkedIn", True, None))
+
+    def test_skips_without_key(self):
+        from jobsearch.sources import googlejobs
+        with self.assertRaisesRegex(RuntimeError, "^skipped"):
+            googlejobs.fetch(dict(CFG, serpapi_key=""))

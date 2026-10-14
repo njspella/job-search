@@ -23,6 +23,10 @@ a key at https://developer.adzuna.com/ and add two repository secrets in GitHub
 (Settings > Secrets and variables > Actions): `ADZUNA_APP_ID` and `ADZUNA_APP_KEY`.
 USAJOBS works the same way with `USAJOBS_API_KEY` and `USAJOBS_EMAIL`.
 
+LinkedIn, Indeed and Glassdoor listings come through Google Jobs, which indexes those sites.
+Get a key at https://serpapi.com/ and add it as the secret `SERPAPI_KEY`. Each refresh uses
+8 searches, so the free plan covers roughly one refresh a day.
+
 ## Running it on your own computer instead
 
 Everything in this mode runs on your computer and stays there (in `data/jobs.db`). It needs only
@@ -58,6 +62,7 @@ by two names (for example "John Deere" and "Deere & Company").
 | Remotive, Remote OK, Himalayas, We Work Remotely | Remote jobs | None |
 | Adzuna | Local and remote listings from many job boards | Free key from [developer.adzuna.com](https://developer.adzuna.com/) |
 | USAJOBS | Federal jobs | Free key from [developer.usajobs.gov](https://developer.usajobs.gov/) |
+| Google Jobs (SerpApi) | LinkedIn, Indeed, Glassdoor and company-site listings | Key from [serpapi.com](https://serpapi.com/) |
 
 LinkedIn, Indeed and Glassdoor don't allow automated searching. For those, keep their email
 alerts on and use **Add a job you found elsewhere** on the page to save postings into the same list.

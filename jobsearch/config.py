@@ -78,12 +78,20 @@ DEFAULTS = {
         "director of engineering",
         "director of operations",
     ],
-    "sources": ["remotive", "remoteok", "himalayas", "weworkremotely", "adzuna", "usajobs"],
+    # Fewer, broader searches for Google Jobs, which counts against SerpApi's monthly limit.
+    "google_jobs_queries": [
+        "engineering manager OR director of engineering OR principal engineer",
+        "AI engineer OR machine learning engineer",
+        "quality director OR quality manager",
+        "operations manager OR plant manager OR director of operations",
+    ],
+    "sources": ["remotive", "remoteok", "himalayas", "weworkremotely", "adzuna", "usajobs", "googlejobs"],
     # Optional API keys. Environment variables of the same name (upper case) also work.
     "adzuna_app_id": "",
     "adzuna_app_key": "",
     "usajobs_api_key": "",
     "usajobs_email": "",
+    "serpapi_key": "",
     "port": 8765,
 }
 
@@ -93,7 +101,7 @@ def load():
     local = ROOT / "config.local.json"
     if local.exists():
         cfg.update(json.loads(local.read_text()))
-    for key in ("adzuna_app_id", "adzuna_app_key", "usajobs_api_key", "usajobs_email"):
+    for key in ("adzuna_app_id", "adzuna_app_key", "usajobs_api_key", "usajobs_email", "serpapi_key"):
         env = os.environ.get(key.upper())
         if env:
             cfg[key] = env

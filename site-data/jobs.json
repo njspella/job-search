@@ -1,18 +1,47 @@
 {
- "refreshed_at": "2026-10-14T23:17:52",
+ "refreshed_at": "2026-10-15T11:58:30",
  "report": {
-  "added": 0,
+  "added": 2,
   "seen": 15,
   "sources": {
-   "remotive": "ok: 10 of 150 matched",
+   "remotive": "ok: 10 of 140 matched",
    "remoteok": "ok: 2 of 99 matched",
-   "himalayas": "ok: 0 of 100 matched",
-   "weworkremotely": "ok: 3 of 88 matched",
-   "adzuna": "skipped: add adzuna_app_id and adzuna_app_key to config.local.json",
-   "usajobs": "skipped: add usajobs_api_key and usajobs_email to config.local.json"
+   "himalayas": "ok: 2 of 100 matched",
+   "weworkremotely": "ok: 3 of 87 matched",
+   "adzuna": "skipped: needs a free Adzuna API key (see README)",
+   "usajobs": "skipped: needs a free USAJOBS API key (see README)",
+   "googlejobs": "skipped: needs a SerpApi key for LinkedIn, Indeed and Glassdoor listings (see README)"
   }
  },
  "jobs": [
+  {
+   "id": "23ca86f6c7ddb2ed",
+   "title": "Machine Learning Engineer",
+   "company": "Anlatan",
+   "location": "United States",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://himalayas.app/companies/anlatan/jobs/machine-learning-engineer-1150872692",
+   "source": "himalayas",
+   "posted": "2026-10-15",
+   "first_seen": "2026-10-15T11:58:30",
+   "last_seen": "2026-10-15T11:58:30"
+  },
+  {
+   "id": "080a65220b58db59",
+   "title": "Engineering Director",
+   "company": "Anovium",
+   "location": "United States",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://himalayas.app/companies/anovium/jobs/engineering-director-5570549658",
+   "source": "himalayas",
+   "posted": "2026-10-15",
+   "first_seen": "2026-10-15T11:58:30",
+   "last_seen": "2026-10-15T11:58:30"
+  },
   {
    "id": "e9ae25d5b65e1d70",
    "title": "Senior Independent AI Engineer / Architect",
@@ -25,7 +54,7 @@
    "source": "remotive",
    "posted": "2026-09-16",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-14T23:17:52"
+   "last_seen": "2026-10-15T11:58:30"
   },
   {
    "id": "7f4070a16ca68ffe",
@@ -39,7 +68,7 @@
    "source": "remoteok",
    "posted": "2026-08-30",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-14T23:17:52"
+   "last_seen": "2026-10-15T11:58:30"
   },
   {
    "id": "76549bd9aeaa308f",
@@ -53,7 +82,7 @@
    "source": "remoteok",
    "posted": "2026-08-27",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-14T23:17:52"
+   "last_seen": "2026-10-15T11:58:30"
   },
   {
    "id": "3635360b8c18c64d",
@@ -67,7 +96,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-12",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-14T23:17:52"
+   "last_seen": "2026-10-15T11:58:30"
   },
   {
    "id": "29caa671ffb97166",
@@ -81,7 +110,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-10",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-14T23:17:52"
+   "last_seen": "2026-10-15T11:58:30"
   },
   {
    "id": "44e2ff010771957b",
@@ -95,7 +124,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-04",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-14T23:17:52"
+   "last_seen": "2026-10-15T11:58:30"
   }
  ]
 }

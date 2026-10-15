@@ -27,6 +27,24 @@ LinkedIn, Indeed and Glassdoor listings come through Google Jobs, which indexes 
 Get a key at https://serpapi.com/ and add it as the secret `SERPAPI_KEY`. Each refresh uses
 8 searches, so the free plan covers roughly one refresh a day.
 
+## The standalone webpage (GitHub Pages)
+
+`docs/index.html` is the same tracker as a plain webpage you can bookmark and open in any
+browser, without claude.ai. It reads `docs/jobs.json`, which every refresh updates.
+
+To turn it on: in GitHub, open **Settings > Pages**, set **Source** to *Deploy from a branch*,
+pick the `claude/project-thread-sspd3j` branch and the `/docs` folder, and save. The address
+appears at the top of that page a minute later (https://njspella.github.io/job-search/).
+GitHub Pages needs either a public repository or a paid GitHub plan for a private one.
+
+What's personal stays in your browser: statuses, notes, jobs you add and imported LinkedIn
+connections are saved in that browser's storage and never uploaded, so they don't follow you
+to another computer or phone. Use **download a backup** at the bottom of the page and
+**restore it** on the other browser to copy them over. The page's Refresh button points you to
+the Refresh jobs workflow, since starting a refresh needs your GitHub sign-in.
+
+`docs/index.html` shares its look and layout with `site/job-tracker.html`; change both together.
+
 ## Running it on your own computer instead
 
 Everything in this mode runs on your computer and stays there (in `data/jobs.db`). It needs only

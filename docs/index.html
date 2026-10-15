@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Pella Job Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  html { background: var(--bg); }
+  .linkbtn { background: none; border: 0; padding: 0; color: var(--accent); font: inherit; cursor: pointer; text-decoration: underline; }
+  /* Layout: a working list. Header with refresh state, status tabs as the summary, then one row per job. */
+  :root {
+    --bg: #f4f6f8; --surface: #ffffff; --fg: #18212b; --muted: #5d6b79; --line: #dde3ea;
+    --accent: #1d5f8a; --accent-ink: #ffffff; --accent-soft: #e3eef6;
+    --good: #20734a; --good-soft: #e1f2e8; --warn: #8a5b00; --warn-soft: #fbefd6;
+    --bad: #a23a2c; --fresh: #fff7dc; --shadow: 0 1px 2px rgb(24 33 43 / .06);
+    --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11161c; --surface: #19212a; --fg: #e6ebf0; --muted: #96a3b1; --line: #2b3642;
+      --accent: #7cb4dc; --accent-ink: #0d1b26; --accent-soft: #1d2e3c;
+      --good: #6fcf9a; --good-soft: #17301f; --warn: #e6b65a; --warn-soft: #33290f;
+      --bad: #f08a7a; --fresh: #2a2612; --shadow: none; color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11161c; --surface: #19212a; --fg: #e6ebf0; --muted: #96a3b1; --line: #2b3642;
+    --accent: #7cb4dc; --accent-ink: #0d1b26; --accent-soft: #1d2e3c;
+    --good: #6fcf9a; --good-soft: #17301f; --warn: #e6b65a; --warn-soft: #33290f;
+    --bad: #f08a7a; --fresh: #2a2612; --shadow: none; color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--fg); font: 15px/1.5 var(--body);
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 20px 48px;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; display: grid; gap: 16px; }
+  button, select, input { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  header { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: end; justify-content: space-between; }
+  h1 { font: 700 26px/1.1 var(--display); letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+  .criteria { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .btn { border: 1px solid var(--line); background: var(--surface); padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: 500; }
+  .btn:hover { border-color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .btn:disabled { opacity: .6; cursor: progress; }
+
+  .notice { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; font-size: 14px; }
+  .notice.good { border-color: var(--good); }
+  .notice.warn { border-color: var(--warn); }
+  .notice ul { margin: 6px 0 0; padding-left: 18px; color: var(--muted); font-size: 13px; }
+
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tab { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 5px 12px; cursor: pointer; font-size: 14px; }
+  .tab b { font-family: var(--mono); font-weight: 500; font-size: 13px; margin-left: 4px; color: var(--muted); }
+  .tab[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
+  .tab[aria-pressed="true"] b { color: var(--accent); }
+
+  .filters { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+  .filters input[type=search] { flex: 1 1 240px; min-width: 0; }
+  input[type=search], input[type=text], input[type=number], input[type=url], select {
+    border: 1px solid var(--line); background: var(--surface); border-radius: 6px; padding: 7px 9px;
+  }
+  label.check { display: inline-flex; gap: 6px; align-items: center; font-size: 14px; color: var(--muted); }
+
+  details.add { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+  details.add summary { cursor: pointer; font-weight: 600; }
+  .form { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; margin-top: 12px; align-items: end; }
+  .form label { display: grid; gap: 4px; font-size: 12px; color: var(--muted); letter-spacing: .02em; }
+  .form label.check { display: inline-flex; font-size: 14px; }
+
+  .list { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 760px; }
+  th { text-align: left; font: 600 11px/1 var(--body); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 12px 12px 10px; border-bottom: 1px solid var(--line); }
+  td { padding: 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  tr.fresh td { background: var(--fresh); }
+  tr.active td:first-child { box-shadow: inset 3px 0 var(--good); }
+  tr.closed td { color: var(--muted); }
+  .title a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  .title a:hover { text-decoration: underline; }
+  .company { color: var(--muted); font-size: 14px; }
+  .tag { display: inline-block; white-space: nowrap; font-size: 12px; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+  .tag.good { background: var(--good-soft); color: var(--good); }
+  .tag.warn { background: var(--warn-soft); color: var(--warn); }
+  .money { font-family: var(--mono); font-size: 13px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .meta { font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .people summary { cursor: pointer; list-style: none; }
+  .people summary::-webkit-details-marker { display: none; }
+  .people ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 4px; font-size: 13px; }
+  .people a { color: var(--accent); }
+  .people span { color: var(--muted); }
+  td.note input { width: 100%; min-width: 150px; }
+  select.status { min-width: 128px; }
+  .empty { padding: 36px 20px; text-align: center; color: var(--muted); }
+  .empty strong { display: block; color: var(--fg); font: 600 17px/1.3 var(--display); margin-bottom: 6px; }
+  footer { color: var(--muted); font-size: 13px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Pella Job Tracker</h1>
+      <div class="criteria">Engineering, AI, quality and operations leadership · $120k+ · remote or within 45 miles of Pella, IA</div>
+    </div>
+    <div class="actions">
+      <button class="btn" id="importBtn" type="button">Import LinkedIn connections</button>
+      <input type="file" id="csvFile" accept=".csv,text/csv" hidden>
+      <button class="btn primary" id="refreshBtn" type="button">Refresh search</button>
+    </div>
+  </header>
+
+  <div class="notice" id="notice" hidden></div>
+  <div class="criteria" id="status">Loading your saved jobs…</div>
+
+  <div class="tabs" id="tabs" role="group" aria-label="Filter by status"></div>
+
+  <div class="filters">
+    <input type="search" id="q" placeholder="Search title, company, location or notes" aria-label="Search jobs">
+    <select id="where" aria-label="Location">
+      <option value="">Remote and near Pella</option>
+      <option value="remote">Remote only</option>
+      <option value="local">Near Pella only</option>
+    </select>
+    <label class="check"><input type="checkbox" id="hasConn"> I know someone there</label>
+    <label class="check"><input type="checkbox" id="hasPay"> Salary listed</label>
+  </div>
+
+  <details class="add" id="addBox">
+    <summary>Add a job you found on LinkedIn, Indeed or a company site</summary>
+    <form class="form" id="addForm">
+      <label>Job title<input type="text" id="fTitle" name="title" required></label>
+      <label>Company<input type="text" id="fCompany" name="company" required></label>
+      <label>Location<input type="text" id="fLocation" name="location" placeholder="Pella, IA"></label>
+      <label>Link<input type="url" id="fUrl" name="url" placeholder="https://"></label>
+      <label>Salary from ($)<input type="number" id="fMin" name="salary_min" step="1000" min="0"></label>
+      <label>Salary to ($)<input type="number" id="fMax" name="salary_max" step="1000" min="0"></label>
+      <label class="check"><input type="checkbox" id="fRemote" name="remote"> Remote</label>
+      <button class="btn primary" type="submit">Save job</button>
+    </form>
+  </details>
+
+  <div class="list">
+    <table>
+      <thead><tr>
+        <th>Status</th><th>Job</th><th>Who you know</th><th>Location</th><th>Salary</th><th>Found</th><th>Notes</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="empty" id="empty" hidden></div>
+  </div>
+
+  <footer>Statuses, notes and your LinkedIn connections are saved in this browser only and never leave it. To move them to another browser,
+    <button type="button" class="linkbtn" id="backupBtn">download a backup</button> and
+    <button type="button" class="linkbtn" id="restoreBtn">restore it</button> there.
+    <input type="file" id="backupFile" accept=".json,application/json" hidden>
+    <button type="button" class="linkbtn" id="forgetBtn">Remove connections from this browser</button>.</footer>
+</div>
+
+<script>
+// Standalone version of the tracker for GitHub Pages. Job listings come from jobs.json next to
+// this page (rewritten by the Refresh jobs workflow). Everything personal, meaning statuses,
+// notes, jobs you add and LinkedIn connections, stays in this browser's storage and is never uploaded.
+const STATUSES = ["New", "Saved", "Applied", "Interviewing", "Offer", "Rejected", "Not interested"];
+const CLOSED = ["Rejected", "Not interested"];
+const IN_PROGRESS = ["Applied", "Interviewing", "Offer"];
+const KEY = { marks: "pjt.marks", added: "pjt.added", conn: "pjt.connections" };
+const WORKFLOW = "https://github.com/njspella/job-search/actions/workflows/refresh.yml";
+
+const S = { listed: [], jobs: [], refresh: null, marks: {}, added: [], people: [],
+            byCompany: new Map(), tab: "Active", loaded: false, failed: false };
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const money = (n) => (n ? "$" + Math.round(n / 1000) + "k" : "");
+const safeUrl = (u) => (/^https?:\/\//i.test(u || "") ? u : "");
+
+function load(key, fallback) {
+  try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; }
+}
+function save(key, value) {
+  try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+  catch { notice("This browser isn't letting the page save. Private browsing windows often block it.", "warn"); return false; }
+}
+
+// Same rules as the Python tool, so "Vermeer Corporation" and "Vermeer Corp." match.
+function companyKey(name) {
+  let s = String(name || "").toLowerCase().replace(/&/g, " and ");
+  s = s.replace(/\b(inc|incorporated|llc|l\.l\.c|ltd|limited|corp|corporation|co|company|plc|lp|llp|group|holdings|the)\b\.?/g, " ");
+  return s.replace(/[^a-z0-9]+/g, " ").trim().split(/\s+/).filter(Boolean).join(" ");
+}
+
+function notice(html, kind = "") {
+  const n = $("notice");
+  n.className = "notice " + kind;
+  n.innerHTML = html;
+  n.hidden = !html;
+}
+
+function when(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  return isNaN(d) ? iso.slice(0, 10) : d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+}
+
+/* ---------- data ---------- */
+
+function combine() {
+  S.jobs = [...S.listed, ...S.added].map((j) => ({ status: "New", notes: "", ...j, ...(S.marks[j.id] || {}) }))
+    .sort((a, b) => String(b.first_seen || "").localeCompare(String(a.first_seen || "")));
+}
+
+function indexPeople() {
+  const map = new Map();
+  for (const [first, last, url, company, position] of S.people) {
+    const key = companyKey(company);
+    if (!key) continue;
+    if (!map.has(key)) map.set(key, []);
+    map.get(key).push({ name: `${first} ${last}`.trim(), url, position });
+  }
+  S.byCompany = map;
+}
+
+function mark(id, patch) {
+  S.marks[id] = { ...(S.marks[id] || {}), ...patch };
+  save(KEY.marks, S.marks);
+  combine();
+}
+
+/* ---------- rendering ---------- */
+
+function matches(j) {
+  if (S.tab === "Active" && CLOSED.includes(j.status)) return false;
+  if (!["Active", "All"].includes(S.tab) && j.status !== S.tab) return false;
+  const where = $("where").value;
+  if (where === "remote" && !j.remote) return false;
+  if (where === "local" && j.remote) return false;
+  if ($("hasConn").checked && !(S.byCompany.get(companyKey(j.company)) || []).length) return false;
+  if ($("hasPay").checked && !(j.salary_min || j.salary_max)) return false;
+  const q = $("q").value.trim().toLowerCase();
+  if (q && ![j.title, j.company, j.location, j.notes].join(" ").toLowerCase().includes(q)) return false;
+  return true;
+}
+
+function renderTabs() {
+  const count = { Active: 0, All: S.jobs.length };
+  for (const j of S.jobs) {
+    count[j.status] = (count[j.status] || 0) + 1;
+    if (!CLOSED.includes(j.status)) count.Active++;
+  }
+  $("tabs").innerHTML = ["Active", ...STATUSES, "All"].map((t) =>
+    `<button type="button" class="tab" data-tab="${esc(t)}" aria-pressed="${t === S.tab}">${esc(t)}<b>${count[t] || 0}</b></button>`
+  ).join("");
+}
+
+function renderStatus() {
+  const parts = [`${S.jobs.length} jobs`];
+  parts.push(S.refresh ? `last refreshed ${new Date(/[zZ]|[+-]\d\d:\d\d$/.test(S.refresh) ? S.refresh : S.refresh + "Z").toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}` : "not refreshed yet");
+  parts.push(S.people.length ? `${S.people.length} LinkedIn connections in this browser` : "no LinkedIn connections imported in this browser");
+  $("status").textContent = parts.join(" · ");
+}
+
+function render() {
+  renderTabs();
+  renderStatus();
+  const latest = S.refresh;
+  const list = S.jobs.filter(matches);
+  $("rows").innerHTML = list.map((j) => {
+    const people = S.byCompany.get(companyKey(j.company)) || [];
+    const fresh = latest && j.first_seen && j.first_seen >= latest && j.status === "New";
+    const cls = [fresh ? "fresh" : "", IN_PROGRESS.includes(j.status) ? "active" : "", CLOSED.includes(j.status) ? "closed" : ""].join(" ");
+    const url = safeUrl(j.url);
+    const title = url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(j.title)}</a>` : esc(j.title);
+    const pay = j.salary_min || j.salary_max
+      ? `<span class="money">${money(j.salary_min)}${j.salary_max && j.salary_max !== j.salary_min ? "–" + money(j.salary_max) : ""}</span>`
+      : `<span class="tag warn">Not listed</span>`;
+    const who = people.length
+      ? `<details class="people"><summary><span class="tag good">${people.length} ${people.length === 1 ? "connection" : "connections"}</span></summary><ul>${
+          people.slice(0, 25).map((p) => {
+            const link = safeUrl(p.url);
+            return `<li>${link ? `<a href="${esc(link)}" target="_blank" rel="noopener">${esc(p.name)}</a>` : esc(p.name)} <span>${esc(p.position)}</span></li>`;
+          }).join("")}${people.length > 25 ? `<li><span>and ${people.length - 25} more</span></li>` : ""}</ul></details>`
+      : `<span class="meta">None</span>`;
+    const opts = STATUSES.map((s) => `<option ${s === j.status ? "selected" : ""}>${esc(s)}</option>`).join("");
+    return `<tr class="${cls}">
+      <td><select class="status" data-id="${esc(j.id)}" aria-label="Status for ${esc(j.title)}">${opts}</select></td>
+      <td class="title">${title}<div class="company">${esc(j.company)}</div></td>
+      <td>${who}</td>
+      <td>${j.remote ? `<span class="tag">Remote</span> ` : ""}<span class="company">${esc(j.location)}</span></td>
+      <td>${pay}</td>
+      <td class="meta" title="Source: ${esc(j.source)}">${esc(when(j.first_seen))}<div>${esc(j.source)}</div></td>
+      <td class="note"><input type="text" class="noteInput" data-id="${esc(j.id)}" value="${esc(j.notes)}" placeholder="Add a note" aria-label="Notes for ${esc(j.title)}"></td>
+    </tr>`;
+  }).join("");
+  const empty = $("empty");
+  empty.hidden = list.length > 0;
+  if (!S.loaded) {
+    empty.innerHTML = "<strong>Loading jobs</strong>";
+  } else if (!S.jobs.length) {
+    empty.innerHTML = S.failed
+      ? "<strong>The job list couldn't be loaded</strong>Reload the page to try again."
+      : "<strong>No jobs yet</strong>They appear after the next refresh, or add one you found elsewhere.";
+  } else {
+    empty.innerHTML = "<strong>No jobs match these filters</strong>Try the All tab or clear the search.";
+  }
+}
+
+/* ---------- connections ---------- */
+
+function parseCsv(text) {
+  const rows = [];
+  let row = [], field = "", quoted = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (quoted) {
+      if (c === '"' && text[i + 1] === '"') { field += '"'; i++; }
+      else if (c === '"') quoted = false;
+      else field += c;
+    } else if (c === '"') quoted = true;
+    else if (c === ",") { row.push(field); field = ""; }
+    else if (c === "\n" || c === "\r") {
+      if (c === "\r" && text[i + 1] === "\n") i++;
+      row.push(field); rows.push(row); row = []; field = "";
+    } else field += c;
+  }
+  if (field || row.length) { row.push(field); rows.push(row); }
+  return rows;
+}
+
+async function importConnections(file) {
+  const rows = parseCsv((await file.text()).replace(/^﻿/, ""));
+  const h = rows.findIndex((r) => r[0] === "First Name");
+  if (h < 0) {
+    notice("That file isn't LinkedIn's Connections.csv. It should have a header row starting with First Name.", "warn");
+    return;
+  }
+  const idx = ["First Name", "Last Name", "URL", "Company", "Position"].map((name) => rows[h].indexOf(name));
+  const people = rows.slice(h + 1).filter((r) => r.length > 1)
+    .map((r) => idx.map((i) => (i >= 0 ? (r[i] || "").trim() : "")));
+  if (!save(KEY.conn, people)) return;
+  S.people = people;
+  indexPeople();
+  render();
+  const matched = S.jobs.filter((j) => (S.byCompany.get(companyKey(j.company)) || []).length).length;
+  notice(`Imported ${people.length} connections into this browser only. You know someone at ${matched} of these jobs.`, "good");
+}
+
+/* ---------- backup ---------- */
+
+function downloadBackup() {
+  const data = { kind: "pella-job-tracker-backup", saved_at: new Date().toISOString(), marks: S.marks, added: S.added };
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 1)], { type: "application/json" }));
+  a.download = `job-tracker-backup-${data.saved_at.slice(0, 10)}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+async function restoreBackup(file) {
+  let data;
+  try { data = JSON.parse(await file.text()); } catch { data = null; }
+  if (!data || data.kind !== "pella-job-tracker-backup") {
+    notice("That file isn't a job tracker backup.", "warn");
+    return;
+  }
+  // Merge, so restoring on a browser that already has statuses keeps the newer ones.
+  for (const [id, m] of Object.entries(data.marks || {})) {
+    const mine = S.marks[id];
+    if (!mine || String(m.status_changed || "") > String(mine.status_changed || "")) S.marks[id] = { ...mine, ...m };
+  }
+  const have = new Set(S.added.map((j) => j.id));
+  S.added.push(...(data.added || []).filter((j) => j && j.id && !have.has(j.id)));
+  save(KEY.marks, S.marks);
+  save(KEY.added, S.added);
+  combine();
+  render();
+  notice(`Restored statuses and notes for ${Object.keys(data.marks || {}).length} jobs.`, "good");
+}
+
+/* ---------- events ---------- */
+
+$("tabs").addEventListener("click", (e) => {
+  const t = e.target.closest(".tab");
+  if (t) { S.tab = t.dataset.tab; render(); }
+});
+for (const id of ["q", "where", "hasConn", "hasPay"]) $(id).addEventListener("input", render);
+
+$("rows").addEventListener("change", (e) => {
+  const id = e.target.dataset.id;
+  if (!id) return;
+  if (e.target.classList.contains("status")) {
+    mark(id, { status: e.target.value, status_changed: new Date().toISOString() });
+    render();
+  } else {
+    mark(id, { notes: e.target.value });
+  }
+});
+
+$("importBtn").addEventListener("click", () => $("csvFile").click());
+$("csvFile").addEventListener("change", async (e) => {
+  const f = e.target.files[0];
+  e.target.value = "";
+  if (f) await importConnections(f);
+});
+$("refreshBtn").addEventListener("click", () => {
+  notice(`The search refreshes every morning on its own. To run it now, open the <a href="${WORKFLOW}" target="_blank" rel="noopener">Refresh jobs workflow</a> on GitHub, click Run workflow, then reload this page in a few minutes.`);
+});
+$("backupBtn").addEventListener("click", downloadBackup);
+$("restoreBtn").addEventListener("click", () => $("backupFile").click());
+$("backupFile").addEventListener("change", async (e) => {
+  const f = e.target.files[0];
+  e.target.value = "";
+  if (f) await restoreBackup(f);
+});
+$("forgetBtn").addEventListener("click", () => {
+  if (!confirm("Remove your LinkedIn connections from this browser? Statuses and notes stay.")) return;
+  try { localStorage.removeItem(KEY.conn); } catch {}
+  S.people = [];
+  indexPeople();
+  render();
+  notice("Your LinkedIn connections were removed from this browser.");
+});
+
+$("addForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const num = (v) => (v ? Number(v) : null);
+  const now = new Date().toISOString();
+  const job = {
+    id: "added-" + now.replace(/\D/g, "") + Math.random().toString(36).slice(2, 6),
+    title: $("fTitle").value.trim(), company: $("fCompany").value.trim(),
+    location: $("fLocation").value.trim(), url: $("fUrl").value.trim(),
+    salary_min: num($("fMin").value), salary_max: num($("fMax").value),
+    remote: $("fRemote").checked, source: "added by you", posted: "",
+    first_seen: now, last_seen: now, status: "Saved", notes: "",
+  };
+  S.added.push(job);
+  if (!save(KEY.added, S.added)) { S.added.pop(); return; }
+  combine();
+  render();
+  e.target.reset();
+  notice(`Saved ${esc(job.title)} at ${esc(job.company)}.`, "good");
+});
+
+/* ---------- start ---------- */
+
+S.marks = load(KEY.marks, {});
+S.added = load(KEY.added, []);
+S.people = load(KEY.conn, []);
+indexPeople();
+render();
+(async () => {
+  try {
+    const res = await fetch("jobs.json", { cache: "no-cache" });
+    if (!res.ok) throw new Error(res.status);
+    const data = await res.json();
+    S.listed = data.jobs || [];
+    S.refresh = data.refreshed_at || null;
+  } catch (e) {
+    S.failed = true;
+    notice("The job list couldn't be loaded. Reload the page to try again.", "warn");
+  }
+  S.loaded = true;
+  combine();
+  render();
+})();
+</script>
+</body>
+</html>

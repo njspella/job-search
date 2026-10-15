@@ -1,7 +1,8 @@
 name: Refresh jobs
 
-# Pulls new postings into data/jobs.json, which the hosted job search website reads.
-# Started by the website's Refresh button (through the daily scheduled task) or by hand.
+# Pulls new postings into site-data/jobs.json, which the claude.ai tracker reads, and copies
+# it to docs/jobs.json for the GitHub Pages site. Started by the daily scheduled task, the
+# claude.ai page's Refresh button, or by hand (Actions > Refresh jobs > Run workflow).
 on:
   workflow_dispatch:
 
@@ -25,11 +26,13 @@ jobs:
           USAJOBS_API_KEY: ${{ secrets.USAJOBS_API_KEY }}
           USAJOBS_EMAIL: ${{ secrets.USAJOBS_EMAIL }}
           SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
-        run: python -m jobsearch export site-data/jobs.json
+        run: |
+          python -m jobsearch export site-data/jobs.json
+          cp site-data/jobs.json docs/jobs.json
       - name: Save results
         run: |
           git config user.name "job-search-bot"
           git config user.email "job-search-bot@users.noreply.github.com"
-          git add site-data/jobs.json
+          git add site-data/jobs.json docs/jobs.json
           git commit -m "Refresh jobs" || echo "No changes"
           git push

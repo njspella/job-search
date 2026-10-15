@@ -1,7 +1,7 @@
 {
- "refreshed_at": "2026-10-15T15:52:45",
+ "refreshed_at": "2026-10-15T15:55:39",
  "report": {
-  "added": 0,
+  "added": 28,
   "seen": 19,
   "sources": {
    "remotive": "ok: 10 of 140 matched",
@@ -10,10 +10,402 @@
    "weworkremotely": "ok: 4 of 87 matched",
    "adzuna": "skipped: needs a free Adzuna API key (see README)",
    "usajobs": "skipped: needs a free USAJOBS API key (see README)",
-   "googlejobs": "error: The read operation timed out"
+   "googlejobs": "ok: 28 of 48 matched"
   }
  },
  "jobs": [
+  {
+   "id": "fb2eb2241ecbdd22",
+   "title": "Principal Engineering Manager (remote within EMEA)",
+   "company": "FYUL",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.tealhq.com/job/principal-engineering-manager_7ea1add38d512f7f17134ee2f2bc49d84afe2?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Teal",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "2253192de5fa2ee7",
+   "title": "Senior Engineering Manager, Grafana Frontend | USA | Remote",
+   "company": "Grafana Labs",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.ziprecruiter.com/c/grafana-labs/Job/Senior-Engineering-Manager,-Grafana-Frontend-%7C-USA-%7C-Remote/-in-Remote,OR?jid=d34244d35b27b066&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "ZipRecruiter",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "868bd9852d96c0bd",
+   "title": "Sr. Manager/Director of Engineering (TLine)",
+   "company": "Grid United",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.ziprecruiter.com/c/Grid-United/Job/Sr.-Manager-Director-of-Engineering-(TLine)/-in-Houston,TX?jid=1377ec7e3ee0005b&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "ZipRecruiter",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "0c62bf2db47fe2da",
+   "title": "Director of Engineering",
+   "company": "Step",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://step.com/careers/director-of-engineering?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Step",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "6f0ca826020f03e1",
+   "title": "Engineering Manager",
+   "company": "Social Discovery Group",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://jobgether.com/offer/6acfd8b949c73d7b997e7239-engineering-manager?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Jobgether",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "2389694ee27a3832",
+   "title": "AI Engineering Manager / REMOTE / Work Life Balance",
+   "company": "Motion Recruitment",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.ziprecruiter.com/c/motion-recruitment/Job/AI-Engineering-Manager-REMOTE-Work-Life-Balance/-in-Detroit,MI?jid=974a7be86a92631b&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "ZipRecruiter",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "2731acbce6dd2548",
+   "title": "Engineering Manager, Notifications Platform (Remote)",
+   "company": "Mosaec",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.jobleads.com/us/job/engineering-manager-notifications-platform-remote--northern--ea886487ccbdb1af49195fe7e86465829?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "JobLeads",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "8154be8571e8c194",
+   "title": "Senior Engineering Manager, Game Experience",
+   "company": "Zwift",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://dailyremote.com/remote-job/senior-engineering-manager-game-experience-5749150?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "DailyRemote",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "3fa6d996d4cbd006",
+   "title": "Rail and Transit Senior Engineering Manager \u2013 Traction Power",
+   "company": "Parsons Corporation",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.linkedin.com/jobs/view/rail-and-transit-senior-engineering-manager-%E2%80%93-traction-power-at-parsons-corporation-4478566453?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "LinkedIn",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "060536d13180a623",
+   "title": "Sr. Staff Engineer - Advanced Materials",
+   "company": "Pella Corporation",
+   "location": "Pella, IA",
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.ziprecruiter.com/c/Pella/Job/Sr.-Staff-Engineer-Advanced-Materials/-in-Pella,IA?jid=7449aba3bf531158&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "ZipRecruiter",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "fdea9be42db4c289",
+   "title": "Remote - Artificial Intelligence and Machine Learning Engineer",
+   "company": "RemoteHive",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://frontendnode-25b1.onrender.com/job/remote-artificial-intelligence-and-machine-learning-engineer-2?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "RemoteHive",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "9350214580b2aa93",
+   "title": "Lead Machine Learning Engineer - Merchandising AI (ML Ops)(Remote Or Hybrid)",
+   "company": "Target",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.linkedin.com/jobs/view/lead-machine-learning-engineer-merchandising-ai-ml-ops-remote-or-hybrid-at-target-4478042407?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "LinkedIn",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "07b79849653b6f57",
+   "title": "Senior Machine Learning Engineer- Generative AI (REMOTE)",
+   "company": "The Home Depot",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://careers.homedepot.com/job/23798091/senior-machine-learning-engineer-generative-ai-remote-remote/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "The Home Depot Careers",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "636ddba249ecc6f5",
+   "title": "Machine Learning Engineer | Contract | Remote",
+   "company": "Tech Holding",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://jobgether.com/offer/6acda61d49c73d7b997487dd-machine-learning-engineer-contract-remote?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Jobgether",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "09cfeb462666bd8c",
+   "title": "AI Engineer - Remote",
+   "company": "YO IT Consulting",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.linkedin.com/jobs/view/ai-engineer-remote-at-yo-it-consulting-4433638150?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "LinkedIn",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "e447120bef6f6f8b",
+   "title": "Open-Source Machine Learning Engineer - US Remote",
+   "company": "Hugging Face",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://apply.workable.com/huggingface/j/19A136F8E2?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Workable Jobs",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "d5064d6d3ac3313a",
+   "title": "Junior AI & Machine Learning Engineer/Software developer-remote",
+   "company": "SynergisticIT",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.careerbuilder.com/job-details/junior-ai-machine-learning-engineer-software-developer-remote-indianapolis-in--37d29880-01e7-4922-be60-94f2806a5551?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "CareerBuilder",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "fc6f7b5efa87bde9",
+   "title": "\ud83c\udf0d Machine Learning Engineer, Remote - Contract",
+   "company": "Xperteez Technology",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.tealhq.com/job/machine-learning-engineer_7ea1a2179bbe9486a019cd19e2cbf6caee6d7?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Teal",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "0afa8fd01b705c21",
+   "title": "Staff Software Engineer, Machine Learning (Consumer Revenue) Discord \u00b7 Remote \u00b7 US \u00b7 Machine Learning Engineering $272,000\u2013$340,000 13d ago",
+   "company": "Aimlroles",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.callings.ai/jobs/dd569cdf-8d8f-4b23-854c-a2c78374990f/staff-software-engineer-machine-learning-consumer-revenue-di-at-aimlroles-san-francisco?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Callings.ai",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "48686ef91ae36daa",
+   "title": "Site Operations Manager",
+   "company": "Ricoh USA, Inc.",
+   "location": "Pella, IA",
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://talents.vaia.com/companies/ricoh-usa-inc/pella/site-operations-manager-143143305/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Talents By Vaia",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "3eee243911b2341d",
+   "title": "Director of Operations",
+   "company": "Pella",
+   "location": "Pella, IA",
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://bebee.com/us/jobs/director-of-operations-pella-pella--lensa-7428_6d7250f3895b2bfe3735ec23a01331966090046f6922d6636d4d93d5b76d13d7?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "BeBee",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "00e391054e756d6b",
+   "title": "Operations Manager | Remote",
+   "company": "OpsArmy",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://jobgether.com/offer/6a8828cca55bd7e3ae119626-operations-manager-remote?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Jobgether",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "fd858c1ad7e2650d",
+   "title": "Operations Manager \u2013 Optimization",
+   "company": "NWF International",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.remoterocketship.com/us/company/nwf-org/jobs/operations-manager-optimization-united-states-remote/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Remote Rocketship",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "87b078c3dc3648c9",
+   "title": "Regional Director of Operations",
+   "company": "Career TEAM",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.indeed.com/viewjob?jk=e020e7904c71eba6&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Indeed",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "2ea7e98f84203e77",
+   "title": "PLANT OPERATIONS MANAGER TEXAS A&M SPACE INSTITUTE",
+   "company": "Compass Group",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.adzuna.com/details/5917143100?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Adzuna",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "be7a1eb8fa0197aa",
+   "title": "Start-Up Operations Manager, DTC Launch",
+   "company": "Exol",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.indeed.com/viewjob?jk=659e9660adb9a8e2&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Indeed",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "49bba3aef25c892e",
+   "title": "Business Operations Manager",
+   "company": "Navina",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.linkedin.com/jobs/view/business-operations-manager-at-navina-4470810212?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "LinkedIn",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
+  {
+   "id": "87ac21efa86fbb97",
+   "title": "Development Operations Manager",
+   "company": "Arete Scholars Fund",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://hiringcafe.com/job/development-operations-manager-arete-scholars-fund-georgia-5k3y848ki237lj0u?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Hiring Cafe",
+   "posted": "",
+   "first_seen": "2026-10-15T15:55:39",
+   "last_seen": "2026-10-15T15:55:39"
+  },
   {
    "id": "2156b401c5da6260",
    "title": "Principal Machine Learning Engineer (Hybrid, Remote, US)",
@@ -26,7 +418,7 @@
    "source": "himalayas",
    "posted": "2026-10-15",
    "first_seen": "2026-10-15T15:47:41",
-   "last_seen": "2026-10-15T15:52:45"
+   "last_seen": "2026-10-15T15:55:39"
   },
   {
    "id": "61bee3e8588eed05",
@@ -40,7 +432,7 @@
    "source": "himalayas",
    "posted": "2026-10-15",
    "first_seen": "2026-10-15T15:47:41",
-   "last_seen": "2026-10-15T15:52:45"
+   "last_seen": "2026-10-15T15:55:39"
   },
   {
    "id": "7521d2b71e88b9c2",
@@ -54,7 +446,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-15",
    "first_seen": "2026-10-15T15:47:41",
-   "last_seen": "2026-10-15T15:52:45"
+   "last_seen": "2026-10-15T15:55:39"
   },
   {
    "id": "23ca86f6c7ddb2ed",
@@ -96,7 +488,7 @@
    "source": "remotive",
    "posted": "2026-09-16",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T15:52:45"
+   "last_seen": "2026-10-15T15:55:39"
   },
   {
    "id": "7f4070a16ca68ffe",
@@ -110,7 +502,7 @@
    "source": "remoteok",
    "posted": "2026-08-30",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T15:52:45"
+   "last_seen": "2026-10-15T15:55:39"
   },
   {
    "id": "76549bd9aeaa308f",
@@ -124,7 +516,7 @@
    "source": "remoteok",
    "posted": "2026-08-27",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T15:52:45"
+   "last_seen": "2026-10-15T15:55:39"
   },
   {
    "id": "3635360b8c18c64d",
@@ -138,7 +530,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-12",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T15:52:45"
+   "last_seen": "2026-10-15T15:55:39"
   },
   {
    "id": "29caa671ffb97166",
@@ -152,7 +544,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-10",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T15:52:45"
+   "last_seen": "2026-10-15T15:55:39"
   },
   {
    "id": "44e2ff010771957b",
@@ -166,7 +558,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-04",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T15:52:45"
+   "last_seen": "2026-10-15T15:55:39"
   }
  ]
 }

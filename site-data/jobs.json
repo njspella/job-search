@@ -1,19 +1,61 @@
 {
- "refreshed_at": "2026-10-15T11:58:30",
+ "refreshed_at": "2026-10-15T15:47:41",
  "report": {
-  "added": 2,
-  "seen": 15,
+  "added": 3,
+  "seen": 16,
   "sources": {
    "remotive": "ok: 10 of 140 matched",
    "remoteok": "ok: 2 of 99 matched",
-   "himalayas": "ok: 2 of 100 matched",
-   "weworkremotely": "ok: 3 of 87 matched",
+   "himalayas": "ok: 3 of 100 matched",
+   "weworkremotely": "ok: 4 of 87 matched",
    "adzuna": "skipped: needs a free Adzuna API key (see README)",
    "usajobs": "skipped: needs a free USAJOBS API key (see README)",
    "googlejobs": "skipped: needs a SerpApi key for LinkedIn, Indeed and Glassdoor listings (see README)"
   }
  },
  "jobs": [
+  {
+   "id": "2156b401c5da6260",
+   "title": "Principal Machine Learning Engineer (Hybrid, Remote, US)",
+   "company": "Vail Resorts",
+   "location": "United States",
+   "remote": true,
+   "salary_min": 140000,
+   "salary_max": 185000,
+   "url": "https://himalayas.app/companies/vailresortscareers/jobs/principal-machine-learning-engineer-hybrid-remote-us",
+   "source": "himalayas",
+   "posted": "2026-10-15",
+   "first_seen": "2026-10-15T15:47:41",
+   "last_seen": "2026-10-15T15:47:41"
+  },
+  {
+   "id": "61bee3e8588eed05",
+   "title": "Staff Machine Learning Engineer",
+   "company": "Pinterest",
+   "location": "United States",
+   "remote": true,
+   "salary_min": 227871,
+   "salary_max": 469147,
+   "url": "https://himalayas.app/companies/pinterestcareers/jobs/staff-machine-learning-engineer",
+   "source": "himalayas",
+   "posted": "2026-10-15",
+   "first_seen": "2026-10-15T15:47:41",
+   "last_seen": "2026-10-15T15:47:41"
+  },
+  {
+   "id": "7521d2b71e88b9c2",
+   "title": "Engineering Manager",
+   "company": "Medify",
+   "location": "Anywhere in the World",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://weworkremotely.com/remote-jobs/medify-engineering-manager",
+   "source": "weworkremotely",
+   "posted": "2026-10-15",
+   "first_seen": "2026-10-15T15:47:41",
+   "last_seen": "2026-10-15T15:47:41"
+  },
   {
    "id": "23ca86f6c7ddb2ed",
    "title": "Machine Learning Engineer",
@@ -54,7 +96,7 @@
    "source": "remotive",
    "posted": "2026-09-16",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T11:58:30"
+   "last_seen": "2026-10-15T15:47:41"
   },
   {
    "id": "7f4070a16ca68ffe",
@@ -68,7 +110,7 @@
    "source": "remoteok",
    "posted": "2026-08-30",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T11:58:30"
+   "last_seen": "2026-10-15T15:47:41"
   },
   {
    "id": "76549bd9aeaa308f",
@@ -82,7 +124,7 @@
    "source": "remoteok",
    "posted": "2026-08-27",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T11:58:30"
+   "last_seen": "2026-10-15T15:47:41"
   },
   {
    "id": "3635360b8c18c64d",
@@ -96,7 +138,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-12",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T11:58:30"
+   "last_seen": "2026-10-15T15:47:41"
   },
   {
    "id": "29caa671ffb97166",
@@ -110,7 +152,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-10",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T11:58:30"
+   "last_seen": "2026-10-15T15:47:41"
   },
   {
    "id": "44e2ff010771957b",
@@ -124,7 +166,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-04",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T11:58:30"
+   "last_seen": "2026-10-15T15:47:41"
   }
  ]
 }

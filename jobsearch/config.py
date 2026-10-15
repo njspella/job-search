@@ -50,7 +50,7 @@ DEFAULTS = {
         "manufacturing manager",
     ],
     # Titles containing any of these are dropped.
-    "exclude_words": ["intern", "internship", "entry level", "sales engineer", "recruiter"],
+    "exclude_words": ["intern", "internship", "entry level", "junior", "sales engineer", "recruiter", "emea", "latam", "apac"],
     # Postings with a listed salary below this are dropped; postings with no
     # salary are kept and flagged.
     "salary_floor": 120000,

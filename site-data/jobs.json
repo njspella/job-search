@@ -1,8 +1,8 @@
 {
- "refreshed_at": "2026-10-15T15:47:41",
+ "refreshed_at": "2026-10-15T15:52:45",
  "report": {
-  "added": 3,
-  "seen": 16,
+  "added": 0,
+  "seen": 19,
   "sources": {
    "remotive": "ok: 10 of 140 matched",
    "remoteok": "ok: 2 of 99 matched",
@@ -10,7 +10,7 @@
    "weworkremotely": "ok: 4 of 87 matched",
    "adzuna": "skipped: needs a free Adzuna API key (see README)",
    "usajobs": "skipped: needs a free USAJOBS API key (see README)",
-   "googlejobs": "skipped: needs a SerpApi key for LinkedIn, Indeed and Glassdoor listings (see README)"
+   "googlejobs": "error: The read operation timed out"
   }
  },
  "jobs": [
@@ -26,7 +26,7 @@
    "source": "himalayas",
    "posted": "2026-10-15",
    "first_seen": "2026-10-15T15:47:41",
-   "last_seen": "2026-10-15T15:47:41"
+   "last_seen": "2026-10-15T15:52:45"
   },
   {
    "id": "61bee3e8588eed05",
@@ -40,7 +40,7 @@
    "source": "himalayas",
    "posted": "2026-10-15",
    "first_seen": "2026-10-15T15:47:41",
-   "last_seen": "2026-10-15T15:47:41"
+   "last_seen": "2026-10-15T15:52:45"
   },
   {
    "id": "7521d2b71e88b9c2",
@@ -54,7 +54,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-15",
    "first_seen": "2026-10-15T15:47:41",
-   "last_seen": "2026-10-15T15:47:41"
+   "last_seen": "2026-10-15T15:52:45"
   },
   {
    "id": "23ca86f6c7ddb2ed",
@@ -96,7 +96,7 @@
    "source": "remotive",
    "posted": "2026-09-16",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T15:47:41"
+   "last_seen": "2026-10-15T15:52:45"
   },
   {
    "id": "7f4070a16ca68ffe",
@@ -110,7 +110,7 @@
    "source": "remoteok",
    "posted": "2026-08-30",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T15:47:41"
+   "last_seen": "2026-10-15T15:52:45"
   },
   {
    "id": "76549bd9aeaa308f",
@@ -124,7 +124,7 @@
    "source": "remoteok",
    "posted": "2026-08-27",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T15:47:41"
+   "last_seen": "2026-10-15T15:52:45"
   },
   {
    "id": "3635360b8c18c64d",
@@ -138,7 +138,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-12",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T15:47:41"
+   "last_seen": "2026-10-15T15:52:45"
   },
   {
    "id": "29caa671ffb97166",
@@ -152,7 +152,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-10",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T15:47:41"
+   "last_seen": "2026-10-15T15:52:45"
   },
   {
    "id": "44e2ff010771957b",
@@ -166,7 +166,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-04",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T15:47:41"
+   "last_seen": "2026-10-15T15:52:45"
   }
  ]
 }

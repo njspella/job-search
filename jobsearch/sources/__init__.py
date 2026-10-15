@@ -19,8 +19,8 @@ def get(url, params=None, headers=None, timeout=30):
         return resp.read().decode("utf-8", errors="replace")
 
 
-def get_json(url, params=None, headers=None):
-    return json.loads(get(url, params, headers))
+def get_json(url, params=None, headers=None, timeout=30):
+    return json.loads(get(url, params, headers, timeout))
 
 
 def job(**fields):

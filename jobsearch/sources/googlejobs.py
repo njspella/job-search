@@ -7,10 +7,15 @@ queries per run (the `google_jobs_queries` setting): one local search and one re
 search for each.
 """
 
+import json
+import urllib.error
+
 from . import get_json, job
 from ..filters import parse_salary
 
 URL = "https://serpapi.com/search.json"
+# A fresh (uncached) Google Jobs search often takes 30-60 seconds on SerpApi's side.
+TIMEOUT = 120
 PREFERRED = ("linkedin", "indeed", "glassdoor")
 
 
@@ -47,12 +52,39 @@ def fetch(cfg):
     key = cfg.get("serpapi_key")
     if not key:
         raise RuntimeError("skipped: needs a SerpApi key for LinkedIn, Indeed and Glassdoor listings (see README)")
-    jobs = []
+    searches = []
     for q in cfg["google_jobs_queries"]:
-        local = {"engine": "google_jobs", "q": q, "location": "Pella, Iowa, United States",
-                 "lrad": round(cfg["radius_miles"] * 1.609), "api_key": key}
-        jobs.extend(parse(get_json(URL, local)))
-        remote = {"engine": "google_jobs", "q": f"{q} remote", "location": "United States",
-                  "ltype": 1, "api_key": key}
-        jobs.extend(parse(get_json(URL, remote), remote=True))
+        # Results are narrowed to the drive radius afterwards by filters.location_ok.
+        searches.append(({"engine": "google_jobs", "q": f"{q} near Pella, IA",
+                          "location": "Iowa, United States", "api_key": key}, False))
+        searches.append(({"engine": "google_jobs", "q": f"{q} remote", "location": "United States",
+                          "ltype": 1, "api_key": key}, True))
+    jobs, errors = [], []
+    for params, remote in searches:
+        # One slow or failed search shouldn't lose the others; retry each once.
+        for attempt in (1, 2):
+            try:
+                data = get_json(URL, params, timeout=TIMEOUT)
+                break
+            except urllib.error.HTTPError as e:
+                # SerpApi explains bad requests in a JSON body; retrying won't help.
+                try:
+                    data = json.loads(e.read().decode("utf-8", errors="replace"))
+                except ValueError:
+                    data = {"error": str(e)}
+                break
+            except Exception as e:
+                data = None
+                if attempt == 2:
+                    errors.append(f"{params['q']!r}: {e}")
+        if data is None:
+            continue
+        if data.get("error") and "hasn't returned any results" not in str(data["error"]):
+            errors.append(f"{params['q']!r}: {data['error']}")
+            continue
+        jobs.extend(parse(data, remote=remote))
+    if errors and len(errors) == len(searches):
+        raise RuntimeError("all Google Jobs searches failed; first error " + errors[0])
+    if errors:
+        print(f"googlejobs: {len(errors)} of {len(searches)} searches failed: {errors}")
     return jobs

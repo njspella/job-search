@@ -248,3 +248,28 @@ class GoogleJobsTests(unittest.TestCase):
         from jobsearch.sources import googlejobs
         with self.assertRaisesRegex(RuntimeError, "^skipped"):
             googlejobs.fetch(dict(CFG, serpapi_key=""))
+
+
+class GoogleJobsRetryTests(unittest.TestCase):
+    def test_one_timeout_keeps_other_results(self):
+        from unittest import mock
+        from jobsearch.sources import googlejobs
+        calls = {"n": 0}
+
+        def fake(url, params=None, headers=None, timeout=30):
+            calls["n"] += 1
+            if calls["n"] <= 2:
+                raise TimeoutError("The read operation timed out")
+            return {"jobs_results": [{"title": "Plant Manager", "company_name": "C" + str(calls["n"]),
+                                      "location": "Pella, IA", "apply_options": [{"title": "Indeed", "link": "u"}]}]}
+        cfg = dict(CFG, serpapi_key="k", google_jobs_queries=["a", "b"])
+        with mock.patch.object(googlejobs, "get_json", fake):
+            jobs = googlejobs.fetch(cfg)
+        self.assertEqual(len(jobs), 3)  # first search failed twice, the other three returned
+
+    def test_all_failing_raises(self):
+        from unittest import mock
+        from jobsearch.sources import googlejobs
+        with mock.patch.object(googlejobs, "get_json", side_effect=TimeoutError("timed out")):
+            with self.assertRaisesRegex(RuntimeError, "all Google Jobs searches failed"):
+                googlejobs.fetch(dict(CFG, serpapi_key="k", google_jobs_queries=["a"]))

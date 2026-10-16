@@ -1,19 +1,285 @@
 {
- "refreshed_at": "2026-10-15T15:55:39",
+ "refreshed_at": "2026-10-16T11:57:45",
  "report": {
-  "added": 28,
-  "seen": 19,
+  "added": 19,
+  "seen": 30,
   "sources": {
-   "remotive": "ok: 10 of 140 matched",
+   "remotive": "ok: 10 of 150 matched",
    "remoteok": "ok: 2 of 99 matched",
-   "himalayas": "ok: 3 of 100 matched",
-   "weworkremotely": "ok: 4 of 87 matched",
+   "himalayas": "ok: 0 of 100 matched",
+   "weworkremotely": "ok: 3 of 87 matched",
    "adzuna": "skipped: needs a free Adzuna API key (see README)",
    "usajobs": "skipped: needs a free USAJOBS API key (see README)",
-   "googlejobs": "ok: 28 of 48 matched"
+   "googlejobs": "ok: 34 of 68 matched"
   }
  },
  "jobs": [
+  {
+   "id": "f16435c697cf023c",
+   "title": "Devices & IOT Field Engineering Manager (Americas)",
+   "company": "Canonical",
+   "location": "",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://canonical.com/careers/3756791?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Canonical",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "2d9b6a5abf99bd74",
+   "title": "Engineering Manager, Client Platform Engineering",
+   "company": "OpenAI",
+   "location": "San Francisco, CA, United States",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.thesaasjobs.com/jobs/680212575-engineering-manager-client-platform-engineering?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "The SaaS Jobs",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "fed91876636b32ed",
+   "title": "Field Engineering Manager",
+   "company": "TurbineOne",
+   "location": "",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.remote-work.app/job/turbineone-field-engineering-manager-remote?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Remote-Work.app",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "edadb4c356cc83fc",
+   "title": "Senior Software Engineering Manager - Full Stack (Slack)",
+   "company": "100 Salesforce, Inc.",
+   "location": "Atlanta, GA, United States",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.linkedin.com/jobs/view/senior-manager-software-engineering-plm-platform-at-dematic-4471228295?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "LinkedIn",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "25385c61b750d353",
+   "title": "Software Engineering Manager",
+   "company": "Top Prospect Group",
+   "location": "White Plains, NY, United States",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.linkedin.com/jobs/view/software-engineering-manager-at-top-prospect-group-4461013996?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "LinkedIn",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "bd8045bcf7116d9e",
+   "title": "Engineering Manager, API",
+   "company": "Runway",
+   "location": "United States",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://jobs.ashbyhq.com/runway-ml/b5d136bb-4143-400b-914a-0ae7377ad8ed?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Jobs",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "ad9e11ba4c334428",
+   "title": "Engineering Manager (Product & Agentic Platform)",
+   "company": "Anrok",
+   "location": "San Francisco, CA, United States (+1 other)",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://app.welcometothejungle.com/jobs/N2DeuFcS?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Welcome To The Jungle | Login",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "25cc58f9b42b581e",
+   "title": "Remote - Artificial Intelligence and Machine Learning Engineer",
+   "company": "Buddy IT Solutions",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://talents.vaia.com/companies/buddy-it-solutions/bartlesville/remote-artificial-intelligence-and-machine-learning-engineer-65633475/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Talents By Vaia",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "55ea6140cd6e6aa4",
+   "title": "AI / Machine Learning Engineer Leaders and Decision-Makers for Workflow Management Tools (Freelance - Remote)",
+   "company": "Prolific Academic Ltd",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.monster.com/job-openings/ai-machine-learning-engineer-leaders-and-decision-makers-for-workflow-management-tools-freelance-remote-detroit-mi--8dd0650b-05eb-4023-b7e8-03dba8295e95?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Monster",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "cf4860b8eb3c19ef",
+   "title": "Regional Quality Manager, Southwest (Remote - Travel Required)",
+   "company": "SOLV Energy LLC",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.monster.com/job-openings/regional-quality-manager-southwest-remote-travel-required-philadelphia-pa--aa1da3f3-d7a7-4070-9e24-4b3601154764?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Monster",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "4c9c6219cef3a068",
+   "title": "Employer Engagement & Job Quality Manager",
+   "company": "Civic Works, Inc.",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.linkedin.com/jobs/view/employer-engagement-job-quality-manager-at-civic-works-inc-4478731403?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "LinkedIn",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "7d2876607fb19b46",
+   "title": "Clinical Quality Manager - Bay Area 901",
+   "company": "Telecare Corporation",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.tealhq.com/job/clinical-quality-manager_7ea1af4c5f80bf394934051f844f2ac815776?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Teal",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "cbe6f8794325b053",
+   "title": "Remote Product Quality Manager",
+   "company": "Upstart Inc.",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.talent.com/view?id=635758387586402183&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Talent.com",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "14528a4670fdbc11",
+   "title": "Remote Regional Supplier Quality Manager, Aero GT; Americas",
+   "company": "GE Vernova, Inc.",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.learn4good.com/jobs/online_remote/quality_control/5508568528/e/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Learn4Good",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "aff223b68d09b58d",
+   "title": "Operations Manager",
+   "company": "The Palmer Group",
+   "location": "Pella, IA",
+   "remote": false,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.jobilize.com/job/us-ia-pella-operations-manager-palmer-group-hiring-now-job-immediately?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Jobilize",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "cc40ea846c5074ed",
+   "title": "Remote Warehouse Operations Manager (North Region)",
+   "company": "Refresco Careers",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.talent.com/view?id=635758326228060667&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Talent.com",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "aa6982e67ec56c11",
+   "title": "Operations Manager - USA",
+   "company": "ScaleOps",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.ziprecruiter.com/c/ScaleOps/Job/Operations-Manager-USA/-in-Boston,MA?jid=c2848dde91a1cd67&utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "ZipRecruiter",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "1f9a42e7199ba2e5",
+   "title": "Revenue Operations Manager",
+   "company": "Pomelo Care",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://jobgether.com/offer/6ad0494e49c73d7b99805851-revenue-operations-manager?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Jobgether",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
+  {
+   "id": "22d1dfb67b756561",
+   "title": "Customer Operations Manager",
+   "company": "Motorola Solutions Inc",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.monster.com/job-openings/customer-operations-manager-cheyenne-wy--41d63843-d1fc-4cf8-922a-405b38e07fa8?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Monster",
+   "posted": "",
+   "first_seen": "2026-10-16T11:57:45",
+   "last_seen": "2026-10-16T11:57:45"
+  },
   {
    "id": "fb2eb2241ecbdd22",
    "title": "Principal Engineering Manager (remote within EMEA)",
@@ -138,7 +404,7 @@
    "source": "LinkedIn",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "060536d13180a623",
@@ -152,7 +418,7 @@
    "source": "ZipRecruiter",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "fdea9be42db4c289",
@@ -180,7 +446,7 @@
    "source": "LinkedIn",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "07b79849653b6f57",
@@ -194,7 +460,7 @@
    "source": "The Home Depot Careers",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "636ddba249ecc6f5",
@@ -222,7 +488,7 @@
    "source": "LinkedIn",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "e447120bef6f6f8b",
@@ -236,7 +502,7 @@
    "source": "Workable Jobs",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "d5064d6d3ac3313a",
@@ -264,7 +530,7 @@
    "source": "Teal",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "0afa8fd01b705c21",
@@ -292,7 +558,7 @@
    "source": "Talents By Vaia",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "3eee243911b2341d",
@@ -306,7 +572,7 @@
    "source": "BeBee",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "00e391054e756d6b",
@@ -320,7 +586,7 @@
    "source": "Jobgether",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "fd858c1ad7e2650d",
@@ -334,7 +600,7 @@
    "source": "Remote Rocketship",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "87b078c3dc3648c9",
@@ -362,7 +628,7 @@
    "source": "Adzuna",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "be7a1eb8fa0197aa",
@@ -376,7 +642,7 @@
    "source": "Indeed",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "49bba3aef25c892e",
@@ -390,7 +656,7 @@
    "source": "LinkedIn",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "87ac21efa86fbb97",
@@ -446,7 +712,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-15",
    "first_seen": "2026-10-15T15:47:41",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "23ca86f6c7ddb2ed",
@@ -964,7 +1230,7 @@
    "source": "remotive",
    "posted": "2026-09-16",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "7f4070a16ca68ffe",
@@ -978,7 +1244,7 @@
    "source": "remoteok",
    "posted": "2026-08-30",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "76549bd9aeaa308f",
@@ -992,7 +1258,7 @@
    "source": "remoteok",
    "posted": "2026-08-27",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "3635360b8c18c64d",
@@ -1020,7 +1286,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-10",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   },
   {
    "id": "44e2ff010771957b",
@@ -1034,7 +1300,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-04",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-16T11:57:45"
   }
  ]
 }

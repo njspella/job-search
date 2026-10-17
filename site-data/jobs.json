@@ -1,19 +1,89 @@
 {
- "refreshed_at": "2026-10-16T11:57:45",
+ "refreshed_at": "2026-10-17T11:56:47",
  "report": {
-  "added": 19,
-  "seen": 30,
+  "added": 5,
+  "seen": 25,
   "sources": {
-   "remotive": "ok: 10 of 150 matched",
+   "remotive": "ok: 0 of 130 matched",
    "remoteok": "ok: 2 of 99 matched",
-   "himalayas": "ok: 0 of 100 matched",
+   "himalayas": "ok: 1 of 100 matched",
    "weworkremotely": "ok: 3 of 87 matched",
    "adzuna": "skipped: needs a free Adzuna API key (see README)",
    "usajobs": "skipped: needs a free USAJOBS API key (see README)",
-   "googlejobs": "ok: 34 of 68 matched"
+   "googlejobs": "ok: 24 of 60 matched"
   }
  },
  "jobs": [
+  {
+   "id": "e0ea8b2fd545b07e",
+   "title": "Security & Threat Operations Manager",
+   "company": "DriveWealth",
+   "location": "United States",
+   "remote": true,
+   "salary_min": 200000,
+   "salary_max": 250000,
+   "url": "https://himalayas.app/companies/drivewealth/jobs/security-threat-operations-manager",
+   "source": "himalayas",
+   "posted": "2026-10-17",
+   "first_seen": "2026-10-17T11:56:47",
+   "last_seen": "2026-10-17T11:56:47"
+  },
+  {
+   "id": "d1b3441b99bc4632",
+   "title": "Senior Engineering Manager/Director",
+   "company": "Commit",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://careervault.io/remote/commit-10835/other/senior-engineering-manager-director-remote-us-or-can-5064955?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Career Vault",
+   "posted": "",
+   "first_seen": "2026-10-17T11:56:47",
+   "last_seen": "2026-10-17T11:56:47"
+  },
+  {
+   "id": "b855d1705523b0ce",
+   "title": "Engineering Manager II, Search Discovery Experience",
+   "company": "Pinterest",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://wellfound.com/jobs/3315708-engineering-manager-ii-search-discovery-experience?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Wellfound",
+   "posted": "",
+   "first_seen": "2026-10-17T11:56:47",
+   "last_seen": "2026-10-17T11:56:47"
+  },
+  {
+   "id": "dccac1249c3c2268",
+   "title": "Engineering Manager, Experience Services",
+   "company": "Nexcess",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://www.remoterocketship.com/us/company/nexcess/jobs/engineering-manager-experience-services-united-states-remote/?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Remote Rocketship",
+   "posted": "",
+   "first_seen": "2026-10-17T11:56:47",
+   "last_seen": "2026-10-17T11:56:47"
+  },
+  {
+   "id": "42a3281f46c30d91",
+   "title": "Operations Manager (Job ID: SORDEE2R)",
+   "company": "InsideOut",
+   "location": "Anywhere",
+   "remote": true,
+   "salary_min": null,
+   "salary_max": null,
+   "url": "https://jobgether.com/offer/6ac53e8a8a27695aea331af4-operations-manager-job-id-sordee2r?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic",
+   "source": "Jobgether",
+   "posted": "",
+   "first_seen": "2026-10-17T11:56:47",
+   "last_seen": "2026-10-17T11:56:47"
+  },
   {
    "id": "f16435c697cf023c",
    "title": "Devices & IOT Field Engineering Manager (Americas)",
@@ -124,7 +194,7 @@
    "source": "Talents By Vaia",
    "posted": "",
    "first_seen": "2026-10-16T11:57:45",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "55ea6140cd6e6aa4",
@@ -138,7 +208,7 @@
    "source": "Monster",
    "posted": "",
    "first_seen": "2026-10-16T11:57:45",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "cf4860b8eb3c19ef",
@@ -152,7 +222,7 @@
    "source": "Monster",
    "posted": "",
    "first_seen": "2026-10-16T11:57:45",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "4c9c6219cef3a068",
@@ -166,7 +236,7 @@
    "source": "LinkedIn",
    "posted": "",
    "first_seen": "2026-10-16T11:57:45",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "7d2876607fb19b46",
@@ -208,7 +278,7 @@
    "source": "Learn4Good",
    "posted": "",
    "first_seen": "2026-10-16T11:57:45",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "aff223b68d09b58d",
@@ -278,7 +348,7 @@
    "source": "Monster",
    "posted": "",
    "first_seen": "2026-10-16T11:57:45",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "fb2eb2241ecbdd22",
@@ -348,7 +418,7 @@
    "source": "Jobgether",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "2389694ee27a3832",
@@ -362,7 +432,7 @@
    "source": "ZipRecruiter",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "2731acbce6dd2548",
@@ -418,7 +488,7 @@
    "source": "ZipRecruiter",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "fdea9be42db4c289",
@@ -446,7 +516,7 @@
    "source": "LinkedIn",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "07b79849653b6f57",
@@ -460,7 +530,7 @@
    "source": "The Home Depot Careers",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "636ddba249ecc6f5",
@@ -488,7 +558,7 @@
    "source": "LinkedIn",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "e447120bef6f6f8b",
@@ -502,7 +572,7 @@
    "source": "Workable Jobs",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "d5064d6d3ac3313a",
@@ -544,7 +614,7 @@
    "source": "Callings.ai",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-15T15:55:39"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "48686ef91ae36daa",
@@ -558,7 +628,7 @@
    "source": "Talents By Vaia",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "3eee243911b2341d",
@@ -586,7 +656,7 @@
    "source": "Jobgether",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "fd858c1ad7e2650d",
@@ -600,7 +670,7 @@
    "source": "Remote Rocketship",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "87b078c3dc3648c9",
@@ -628,7 +698,7 @@
    "source": "Adzuna",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "be7a1eb8fa0197aa",
@@ -656,7 +726,7 @@
    "source": "LinkedIn",
    "posted": "",
    "first_seen": "2026-10-15T15:55:39",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "87ac21efa86fbb97",
@@ -712,7 +782,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-15",
    "first_seen": "2026-10-15T15:47:41",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "23ca86f6c7ddb2ed",
@@ -1244,7 +1314,7 @@
    "source": "remoteok",
    "posted": "2026-08-30",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "76549bd9aeaa308f",
@@ -1258,7 +1328,7 @@
    "source": "remoteok",
    "posted": "2026-08-27",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "3635360b8c18c64d",
@@ -1286,7 +1356,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-10",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   },
   {
    "id": "44e2ff010771957b",
@@ -1300,7 +1370,7 @@
    "source": "weworkremotely",
    "posted": "2026-10-04",
    "first_seen": "2026-10-14T23:17:02",
-   "last_seen": "2026-10-16T11:57:45"
+   "last_seen": "2026-10-17T11:56:47"
   }
  ]
 }
